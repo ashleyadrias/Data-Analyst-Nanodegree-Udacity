@@ -1,7 +1,7 @@
 # [Udacity Data Analyst Nanodegree](https://www.udacity.com/course/data-analyst-nanodegree--nd002)
 Projects for my Udacity Data Analyst Nanodegree
 
-##Term 1
+###Term 1
 
 ### P1: Explore Weather Trends
 
@@ -19,7 +19,7 @@ In this project, I analyze a dataset and then communicate my findings about it. 
 
 I explore the results of an A/B test run by an e-commerce website. The company has developed a new web page in order to try and increase the number of users who "convert," meaning the number of users who decide to pay for the company's product. My goal is to work through this notebook to help the company understand if they should implement this new page, keep the old page, or perhaps run the experiment longer to make their decision.
 
-##Term 2
+###Term 2
 
 ### P5: Test a Perceptual Phenomenon
 
@@ -38,4 +38,4 @@ Real-world data rarely comes clean. Using Python and its libraries, I gather dat
 I create a data visualization using Tableau that tells a story or highlights trends or patterns in a data set. My work should be a reflection of the theory and practice of data visualization, such as visual encodings, design principles, and effective communication.
 
 
-![Udacity Data Analyst Nanodegree certificate](certificate.pdf)# Data-Analyst-Nanodegree-Program
+[Udacity Data Analyst Nanodegree certificate](certificate.pdf)# Data-Analyst-Nanodegree-Program
