@@ -23,7 +23,7 @@ I explore the results of an A/B test run by an e-commerce website. The company h
 
 ### P5: Test a Perceptual Phenomenon
 
-I investigate a classic phenomenon from experimental psychology called the Stroop Effect. I learn a little bit about the experiment, create a hypothesis regarding the outcome of the task, then go through the task. I then look at some data collected from others who have performed the same task and will compute some statistics describing the results. Finally, I interpret the results in terms of your hypotheses.
+I investigate a classic phenomenon from experimental psychology called the Stroop Effect. I learn a little bit about the experiment, create a hypothesis regarding the outcome of the task, then go through the task. I then look at some data collected from others who have performed the same task and will compute some statistics describing the results. Finally, I interpret the results in terms of my hypotheses.
 
 ### P6: Explore and Summarize Data
 
@@ -31,7 +31,7 @@ I use R and apply exploratory data analysis techniques to explore relationships 
 
 ### P7: Wrangle and Analyze Data
 
-Real-world data rarely comes clean. Using Python and its libraries, I gather data from a variety of sources and in a variety of formats, assess its quality and tidiness, then clean it. This is called data wrangling. I document your wrangling efforts in a Jupyter Notebook, plus showcase them through analyses and visualizations using Python (and its libraries) and/or SQL.
+Real-world data rarely comes clean. Using Python and its libraries, I gather data from a variety of sources and in a variety of formats, assess its quality and tidiness, then clean it. This is called data wrangling. I document my wrangling efforts in a Jupyter Notebook, plus showcase them through analyses and visualizations using Python (and its libraries) and/or SQL.
 
 ### P8: Create Tableau Story
 
