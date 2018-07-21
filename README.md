@@ -39,3 +39,5 @@ I create a data visualization using Tableau that tells a story or highlights tre
 
 
 [Udacity Data Analyst Nanodegree certificate](certificate.pdf) Data-Analyst-Nanodegree-Program
+
+![Udacity Data Analyst Nanodegree certificate](certificate.png)
