@@ -38,4 +38,4 @@ Real-world data rarely comes clean. Using Python and its libraries, I gather dat
 I create a data visualization using Tableau that tells a story or highlights trends or patterns in a data set. My work should be a reflection of the theory and practice of data visualization, such as visual encodings, design principles, and effective communication.
 
 
-[Udacity Data Analyst Nanodegree certificate](certificate.pdf)# Data-Analyst-Nanodegree-Program
+[Udacity Data Analyst Nanodegree certificate](certificate.pdf) Data-Analyst-Nanodegree-Program
