@@ -5,7 +5,7 @@ Projects for my Udacity Data Analyst Nanodegree
 
 ### P1: Explore Weather Trends
 
-In this project, you will analyze local and global temperature data and compare the temperature trends where you live to overall global temperature trends.
+I analyze local and global temperature data and compare the temperature trends where I live to overall global temperature trends.
 
 ### P2: Explore US Bikeshare Data
 
