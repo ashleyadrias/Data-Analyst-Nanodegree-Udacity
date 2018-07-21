@@ -1,0 +1,2239 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{wrangling-act}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+ Project\#3 WeRateDogs for Udacity's Data Analyst Nanodegree
+
+Made by: Ashley Adrias \_\_\_
+
+    \section{Import Packages}\label{import-packages}
+
+\subsection{Packages}\label{packages}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}113}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} \PY{c+c1}{\PYZsh{} Dataframe manipulation}
+          \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np} \PY{c+c1}{\PYZsh{} Mathematical Operations}
+          
+          \PY{k+kn}{import} \PY{n+nn}{tweepy} \PY{c+c1}{\PYZsh{} Access Twitter API package}
+          \PY{k+kn}{import} \PY{n+nn}{json} \PY{c+c1}{\PYZsh{} JSON manipulation}
+          \PY{k+kn}{import} \PY{n+nn}{os} \PY{c+c1}{\PYZsh{} Directory manipulation}
+          \PY{k+kn}{from} \PY{n+nn}{tqdm} \PY{k}{import} \PY{o}{*} \PY{c+c1}{\PYZsh{} Progress tracker bar for tweet import}
+          
+          \PY{k+kn}{import} \PY{n+nn}{requests} \PY{c+c1}{\PYZsh{} Request to server to download files}
+          \PY{k+kn}{import} \PY{n+nn}{sqlalchemy} \PY{c+c1}{\PYZsh{} Export clean data to sql database}
+          \PY{k+kn}{import} \PY{n+nn}{pickle} \PY{c+c1}{\PYZsh{} Serializa error handling}
+\end{Verbatim}
+
+
+    \subsection{Step\#1 Import Data}\label{step1-import-data}
+
+\subsubsection{Import WeRateDog Tweet Archive from
+twitter-archive-enhanced.csv}\label{import-weratedog-tweet-archive-from-twitter-archive-enhanced.csv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}114}]:} \PY{c+c1}{\PYZsh{} Import Manually Downloaded Data}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{twitter\PYZhy{}archive\PYZhy{}enhanced.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}114}]:}              tweet\_id  in\_reply\_to\_status\_id  in\_reply\_to\_user\_id  \textbackslash{}
+          0  892420643555336193                    NaN                  NaN   
+          1  892177421306343426                    NaN                  NaN   
+          2  891815181378084864                    NaN                  NaN   
+          3  891689557279858688                    NaN                  NaN   
+          4  891327558926688256                    NaN                  NaN   
+          
+                             timestamp  \textbackslash{}
+          0  2017-08-01 16:23:56 +0000   
+          1  2017-08-01 00:17:27 +0000   
+          2  2017-07-31 00:18:03 +0000   
+          3  2017-07-30 15:58:51 +0000   
+          4  2017-07-29 16:00:24 +0000   
+          
+                                                        source  \textbackslash{}
+          0  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          1  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          2  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          3  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          4  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          
+                                                          text  retweeted\_status\_id  \textbackslash{}
+          0  This is Phineas. He's a mystical boy. Only eve{\ldots}                  NaN   
+          1  This is Tilly. She's just checking pup on you{\ldots}                  NaN   
+          2  This is Archie. He is a rare Norwegian Pouncin{\ldots}                  NaN   
+          3  This is Darla. She commenced a snooze mid meal{\ldots}                  NaN   
+          4  This is Franklin. He would like you to stop ca{\ldots}                  NaN   
+          
+             retweeted\_status\_user\_id retweeted\_status\_timestamp  \textbackslash{}
+          0                       NaN                        NaN   
+          1                       NaN                        NaN   
+          2                       NaN                        NaN   
+          3                       NaN                        NaN   
+          4                       NaN                        NaN   
+          
+                                                 expanded\_urls  rating\_numerator  \textbackslash{}
+          0  https://twitter.com/dog\_rates/status/892420643{\ldots}                13   
+          1  https://twitter.com/dog\_rates/status/892177421{\ldots}                13   
+          2  https://twitter.com/dog\_rates/status/891815181{\ldots}                12   
+          3  https://twitter.com/dog\_rates/status/891689557{\ldots}                13   
+          4  https://twitter.com/dog\_rates/status/891327558{\ldots}                12   
+          
+             rating\_denominator      name doggo floofer pupper puppo  
+          0                  10   Phineas  None    None   None  None  
+          1                  10     Tilly  None    None   None  None  
+          2                  10    Archie  None    None   None  None  
+          3                  10     Darla  None    None   None  None  
+          4                  10  Franklin  None    None   None  None  
+\end{Verbatim}
+            
+    \subsubsection{Import Image Prediction from Udacity
+Server}\label{import-image-prediction-from-udacity-server}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}115}]:} \PY{c+c1}{\PYZsh{} Import Image Prediction file from Udacity Server using request}
+          \PY{n}{url} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://d17h27t6h515a5.cloudfront.net/topher/2017/August/599fd2ad\PYZus{}image\PYZhy{}predictions/image\PYZhy{}predictions.tsv}\PY{l+s+s1}{\PYZsq{}}
+          \PY{n}{response} \PY{o}{=} \PY{n}{requests}\PY{o}{.}\PY{n}{get}\PY{p}{(}\PY{n}{url}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Save the file to image\PYZhy{}predictions.tsv}
+          \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{image\PYZhy{}predictions.tsv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:} \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{n}{response}\PY{o}{.}\PY{n}{content}\PY{p}{)}
+              
+          \PY{c+c1}{\PYZsh{} Input data from image\PYZhy{}preductions.tsv into a dataframe, tsv is \PYZsq{}t\PYZsq{} seperated value}
+          \PY{n}{df\PYZus{}breeds\PYZus{}pred} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{image\PYZhy{}predictions.tsv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{sep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} View the 1st 5 lines}
+          \PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}115}]:}              tweet\_id                                          jpg\_url  \textbackslash{}
+          0  666020888022790149  https://pbs.twimg.com/media/CT4udn0WwAA0aMy.jpg   
+          1  666029285002620928  https://pbs.twimg.com/media/CT42GRgUYAA5iDo.jpg   
+          2  666033412701032449  https://pbs.twimg.com/media/CT4521TWwAEvMyu.jpg   
+          3  666044226329800704  https://pbs.twimg.com/media/CT5Dr8HUEAA-lEu.jpg   
+          4  666049248165822465  https://pbs.twimg.com/media/CT5IQmsXIAAKY4A.jpg   
+          
+             img\_num                      p1   p1\_conf  p1\_dog                  p2  \textbackslash{}
+          0        1  Welsh\_springer\_spaniel  0.465074    True              collie   
+          1        1                 redbone  0.506826    True  miniature\_pinscher   
+          2        1         German\_shepherd  0.596461    True            malinois   
+          3        1     Rhodesian\_ridgeback  0.408143    True             redbone   
+          4        1      miniature\_pinscher  0.560311    True          Rottweiler   
+          
+              p2\_conf  p2\_dog                   p3   p3\_conf  p3\_dog  
+          0  0.156665    True    Shetland\_sheepdog  0.061428    True  
+          1  0.074192    True  Rhodesian\_ridgeback  0.072010    True  
+          2  0.138584    True           bloodhound  0.116197    True  
+          3  0.360687    True   miniature\_pinscher  0.222752    True  
+          4  0.243682    True             Doberman  0.154629    True  
+\end{Verbatim}
+            
+    \subsubsection{Import Tweets from Twitter via Tweepy and Twitter
+API}\label{import-tweets-from-twitter-via-tweepy-and-twitter-api}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}116}]:} \PY{c+c1}{\PYZsh{} Import Twitter API details into dataframe}
+          \PY{n}{df\PYZus{}api} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{twitter\PYZhy{}api.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Assign API auth details to its respective variable}
+          \PY{n}{consumer\PYZus{}key} \PY{o}{=} \PY{n}{df\PYZus{}api}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{consumer\PYZus{}secret} \PY{o}{=} \PY{n}{df\PYZus{}api}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{access\PYZus{}token} \PY{o}{=} \PY{n}{df\PYZus{}api}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+          \PY{n}{access\PYZus{}secret} \PY{o}{=} \PY{n}{df\PYZus{}api}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{} Using the auth details setup connection}
+          \PY{n}{auth} \PY{o}{=} \PY{n}{tweepy}\PY{o}{.}\PY{n}{OAuthHandler}\PY{p}{(}\PY{n}{consumer\PYZus{}key}\PY{p}{,} \PY{n}{consumer\PYZus{}secret}\PY{p}{)}
+          \PY{n}{auth}\PY{o}{.}\PY{n}{set\PYZus{}access\PYZus{}token}\PY{p}{(}\PY{n}{access\PYZus{}token}\PY{p}{,} \PY{n}{access\PYZus{}secret}\PY{p}{)}
+          \PY{n}{api} \PY{o}{=} \PY{n}{tweepy}\PY{o}{.}\PY{n}{API}\PY{p}{(}\PY{n}{auth\PYZus{}handler}\PY{o}{=}\PY{n}{auth}\PY{p}{,} \PY{n}{wait\PYZus{}on\PYZus{}rate\PYZus{}limit}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{wait\PYZus{}on\PYZus{}rate\PYZus{}limit\PYZus{}notify}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} From the WeRateDogs tweets, create a list of tweet\PYZus{}ids, which will be used to gather more tweet info from Twitter}
+          \PY{n}{tweet\PYZus{}ids} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{list}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}117}]:} \PY{c+c1}{\PYZsh{} Write the Tween JSON to File called tweet\PYZus{}json.txt. Unfound ids are inputted into failed\PYZus{}ids[]}
+          \PY{n}{failed\PYZus{}ids}\PY{o}{=}\PY{p}{[}\PY{p}{]}
+          
+          \PY{k}{if} \PY{o+ow}{not} \PY{n}{os}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{exists}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet\PYZus{}json.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{:}
+              \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet\PYZus{}json.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{a}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{encoding}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{UTF\PYZhy{}8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+                  \PY{k}{for} \PY{n}{tweet\PYZus{}id} \PY{o+ow}{in} \PY{n}{tqdm}\PY{p}{(}\PY{n}{tweet\PYZus{}ids}\PY{p}{)}\PY{p}{:}
+                      \PY{k}{try}\PY{p}{:}
+                          \PY{n}{tweet} \PY{o}{=} \PY{n}{api}\PY{o}{.}\PY{n}{get\PYZus{}status}\PY{p}{(}\PY{n}{tweet\PYZus{}id}\PY{p}{,} \PY{n}{tweet\PYZus{}mode}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{extended}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{o}{.}\PY{n}{\PYZus{}json}
+                          \PY{n}{json}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{tweet}\PY{p}{,} \PY{n}{file}\PY{p}{)}
+                          \PY{n}{file}\PY{o}{.}\PY{n}{write}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                      \PY{k}{except}\PY{p}{:}
+                          \PY{n+nb}{print}\PY{p}{(}\PY{n}{tweet\PYZus{}id}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{encountered an error, writing to memory.}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                          \PY{n}{failed\PYZus{}ids}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tweet\PYZus{}ids}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}118}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s pickle the error for later investigation}
+          \PY{n}{pickle}\PY{o}{.}\PY{n}{dump}\PY{p}{(}\PY{n}{failed\PYZus{}ids}\PY{p}{,} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{failed\PYZus{}ids.pkl}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{wb}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}print(failed\PYZus{}ids)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}119}]:} \PY{c+c1}{\PYZsh{} Insert the JSON file into a dataframe called df\PYZus{}api by each line}
+          
+          \PY{c+c1}{\PYZsh{} We first need to insert each line in the JSON file into a list. Each item on the list is from 1 tweet}
+          \PY{n}{tweets\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+          \PY{k}{with} \PY{n+nb}{open}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{tweet\PYZus{}json.txt}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{file}\PY{p}{:}
+              \PY{k}{for} \PY{n}{line} \PY{o+ow}{in} \PY{n}{file}\PY{p}{:}
+                  \PY{k}{try}\PY{p}{:}
+                      \PY{n}{tweet} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{loads}\PY{p}{(}\PY{n}{line}\PY{p}{)} \PY{c+c1}{\PYZsh{} load tweet}
+                      \PY{n}{tweets\PYZus{}data}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{tweet}\PY{p}{)} \PY{c+c1}{\PYZsh{} Append to list}
+                  \PY{k}{except}\PY{p}{:}
+                      \PY{k}{continue}
+                      
+          \PY{c+c1}{\PYZsh{}Convert tweets\PYZus{}data list into df\PYZus{}api            }
+          \PY{n}{df\PYZus{}api} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{tweets\PYZus{}data}\PY{p}{,} \PY{n}{columns}\PY{o}{=}\PY{n+nb}{list}\PY{p}{(}\PY{n}{tweets\PYZus{}data}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{keys}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{df\PYZus{}api}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}119}]:}                        created\_at                  id              id\_str  \textbackslash{}
+          0  Tue Aug 01 16:23:56 +0000 2017  892420643555336193  892420643555336193   
+          1  Tue Aug 01 00:17:27 +0000 2017  892177421306343426  892177421306343426   
+          2  Mon Jul 31 00:18:03 +0000 2017  891815181378084864  891815181378084864   
+          3  Sun Jul 30 15:58:51 +0000 2017  891689557279858688  891689557279858688   
+          4  Sat Jul 29 16:00:24 +0000 2017  891327558926688256  891327558926688256   
+          
+                                                     full\_text  truncated  \textbackslash{}
+          0  This is Phineas. He's a mystical boy. Only eve{\ldots}      False   
+          1  This is Tilly. She's just checking pup on you{\ldots}      False   
+          2  This is Archie. He is a rare Norwegian Pouncin{\ldots}      False   
+          3  This is Darla. She commenced a snooze mid meal{\ldots}      False   
+          4  This is Franklin. He would like you to stop ca{\ldots}      False   
+          
+            display\_text\_range                                           entities  \textbackslash{}
+          0            [0, 85]  \{'hashtags': [], 'symbols': [], 'user\_mentions{\ldots}   
+          1           [0, 138]  \{'hashtags': [], 'symbols': [], 'user\_mentions{\ldots}   
+          2           [0, 121]  \{'hashtags': [], 'symbols': [], 'user\_mentions{\ldots}   
+          3            [0, 79]  \{'hashtags': [], 'symbols': [], 'user\_mentions{\ldots}   
+          4           [0, 138]  \{'hashtags': [\{'text': 'BarkWeek', 'indices': {\ldots}   
+          
+                                             extended\_entities  \textbackslash{}
+          0  \{'media': [\{'id': 892420639486877696, 'id\_str'{\ldots}   
+          1  \{'media': [\{'id': 892177413194625024, 'id\_str'{\ldots}   
+          2  \{'media': [\{'id': 891815175371796480, 'id\_str'{\ldots}   
+          3  \{'media': [\{'id': 891689552724799489, 'id\_str'{\ldots}   
+          4  \{'media': [\{'id': 891327551943041024, 'id\_str'{\ldots}   
+          
+                                                        source  in\_reply\_to\_status\_id  \textbackslash{}
+          0  <a href="http://twitter.com/download/iphone" r{\ldots}                    NaN   
+          1  <a href="http://twitter.com/download/iphone" r{\ldots}                    NaN   
+          2  <a href="http://twitter.com/download/iphone" r{\ldots}                    NaN   
+          3  <a href="http://twitter.com/download/iphone" r{\ldots}                    NaN   
+          4  <a href="http://twitter.com/download/iphone" r{\ldots}                    NaN   
+          
+             {\ldots}  place  contributors is\_quote\_status retweet\_count favorite\_count  \textbackslash{}
+          0  {\ldots}   None          None           False          8544          38641   
+          1  {\ldots}   None          None           False          6285          33118   
+          2  {\ldots}   None          None           False          4162          24932   
+          3  {\ldots}   None          None           False          8664          42028   
+          4  {\ldots}   None          None           False          9423          40183   
+          
+            favorited retweeted possibly\_sensitive possibly\_sensitive\_appealable  lang  
+          0     False     False              False                         False    en  
+          1     False     False              False                         False    en  
+          2     False     False              False                         False    en  
+          3     False     False              False                         False    en  
+          4     False     False              False                         False    en  
+          
+          [5 rows x 27 columns]
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}120}]:} \PY{c+c1}{\PYZsh{} Lets see what kind columns we have from twitter }
+          \PY{n}{df\PYZus{}api}\PY{o}{.}\PY{n}{columns}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}120}]:} Index(['created\_at', 'id', 'id\_str', 'full\_text', 'truncated',
+                 'display\_text\_range', 'entities', 'extended\_entities', 'source',
+                 'in\_reply\_to\_status\_id', 'in\_reply\_to\_status\_id\_str',
+                 'in\_reply\_to\_user\_id', 'in\_reply\_to\_user\_id\_str',
+                 'in\_reply\_to\_screen\_name', 'user', 'geo', 'coordinates', 'place',
+                 'contributors', 'is\_quote\_status', 'retweet\_count', 'favorite\_count',
+                 'favorited', 'retweeted', 'possibly\_sensitive',
+                 'possibly\_sensitive\_appealable', 'lang'],
+                dtype='object')
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}121}]:} \PY{c+c1}{\PYZsh{} We don\PYZsq{}t need them all, so lets trim down df\PYZus{}api to the necessary columns}
+          \PY{n}{df\PYZus{}api\PYZus{}trim} \PY{o}{=} \PY{n}{df\PYZus{}api}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{id}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{retweet\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{favorite\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}
+          
+          \PY{n}{df\PYZus{}api\PYZus{}trim}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}121}]:}                    id  retweet\_count  favorite\_count
+          0  892420643555336193           8544           38641
+          1  892177421306343426           6285           33118
+          2  891815181378084864           4162           24932
+          3  891689557279858688           8664           42028
+          4  891327558926688256           9423           40183
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}122}]:} \PY{c+c1}{\PYZsh{} Save Dataframe for Visual Assessment}
+          \PY{n}{df\PYZus{}api\PYZus{}trim}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}json.csv}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Copy Dataframes for Cleaning}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean} \PY{o}{=} \PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean} \PY{o}{=} \PY{n}{df\PYZus{}api\PYZus{}trim}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \section{Step\#2 Assess}\label{step2-assess}
+
+    \subsubsection{df\_twitter\_arch}\label{df_twitter_arch}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}123}]:} \PY{c+c1}{\PYZsh{} Check Data Types of Each Dataframe}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2356 entries, 0 to 2355
+Data columns (total 17 columns):
+tweet\_id                      2356 non-null int64
+in\_reply\_to\_status\_id         78 non-null float64
+in\_reply\_to\_user\_id           78 non-null float64
+timestamp                     2356 non-null object
+source                        2356 non-null object
+text                          2356 non-null object
+retweeted\_status\_id           181 non-null float64
+retweeted\_status\_user\_id      181 non-null float64
+retweeted\_status\_timestamp    181 non-null object
+expanded\_urls                 2297 non-null object
+rating\_numerator              2356 non-null int64
+rating\_denominator            2356 non-null int64
+name                          2356 non-null object
+doggo                         2356 non-null object
+floofer                       2356 non-null object
+pupper                        2356 non-null object
+puppo                         2356 non-null object
+dtypes: float64(4), int64(3), object(10)
+memory usage: 313.0+ KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}124}]:} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{tail}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}124}]:}                 tweet\_id  in\_reply\_to\_status\_id  in\_reply\_to\_user\_id  \textbackslash{}
+          2351  666049248165822465                    NaN                  NaN   
+          2352  666044226329800704                    NaN                  NaN   
+          2353  666033412701032449                    NaN                  NaN   
+          2354  666029285002620928                    NaN                  NaN   
+          2355  666020888022790149                    NaN                  NaN   
+          
+                                timestamp  \textbackslash{}
+          2351  2015-11-16 00:24:50 +0000   
+          2352  2015-11-16 00:04:52 +0000   
+          2353  2015-11-15 23:21:54 +0000   
+          2354  2015-11-15 23:05:30 +0000   
+          2355  2015-11-15 22:32:08 +0000   
+          
+                                                           source  \textbackslash{}
+          2351  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          2352  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          2353  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          2354  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          2355  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          
+                                                             text  retweeted\_status\_id  \textbackslash{}
+          2351  Here we have a 1949 1st generation vulpix. Enj{\ldots}                  NaN   
+          2352  This is a purebred Piers Morgan. Loves to Netf{\ldots}                  NaN   
+          2353  Here is a very happy pup. Big fan of well-main{\ldots}                  NaN   
+          2354  This is a western brown Mitsubishi terrier. Up{\ldots}                  NaN   
+          2355  Here we have a Japanese Irish Setter. Lost eye{\ldots}                  NaN   
+          
+                retweeted\_status\_user\_id retweeted\_status\_timestamp  \textbackslash{}
+          2351                       NaN                        NaN   
+          2352                       NaN                        NaN   
+          2353                       NaN                        NaN   
+          2354                       NaN                        NaN   
+          2355                       NaN                        NaN   
+          
+                                                    expanded\_urls  rating\_numerator  \textbackslash{}
+          2351  https://twitter.com/dog\_rates/status/666049248{\ldots}                 5   
+          2352  https://twitter.com/dog\_rates/status/666044226{\ldots}                 6   
+          2353  https://twitter.com/dog\_rates/status/666033412{\ldots}                 9   
+          2354  https://twitter.com/dog\_rates/status/666029285{\ldots}                 7   
+          2355  https://twitter.com/dog\_rates/status/666020888{\ldots}                 8   
+          
+                rating\_denominator  name doggo floofer pupper puppo  
+          2351                  10  None  None    None   None  None  
+          2352                  10     a  None    None   None  None  
+          2353                  10     a  None    None   None  None  
+          2354                  10     a  None    None   None  None  
+          2355                  10  None  None    None   None  None  
+\end{Verbatim}
+            
+    Quality Issues: * Some of the columns have missing values:
+in\_reply\_to\_status\_id: 78 non-null float64 in\_reply\_to\_user\_id:
+78 non-null float64 retweeted\_status\_id: 181 non-null float64
+retweeted\_status\_user\_id: 181 non-null float64
+retweeted\_status\_timestamp: 181 non-null object expanded\_urls: 2297
+non-null object * tweet\_id needs to converted to a categorical variable
+* the numerator is not always less than the demoninator
+
+Tidiness Issues: * We should combine the doggo, floofer, pupper, and
+puppo together. They both represent some sort of dog theme
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsubsection{df\_breeds\_pred}\label{df_breeds_pred}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}125}]:} \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2075 entries, 0 to 2074
+Data columns (total 12 columns):
+tweet\_id    2075 non-null int64
+jpg\_url     2075 non-null object
+img\_num     2075 non-null int64
+p1          2075 non-null object
+p1\_conf     2075 non-null float64
+p1\_dog      2075 non-null bool
+p2          2075 non-null object
+p2\_conf     2075 non-null float64
+p2\_dog      2075 non-null bool
+p3          2075 non-null object
+p3\_conf     2075 non-null float64
+p3\_dog      2075 non-null bool
+dtypes: bool(3), float64(3), int64(2), object(4)
+memory usage: 152.1+ KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}126}]:} \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}126}]:}              tweet\_id                                          jpg\_url  \textbackslash{}
+          0  666020888022790149  https://pbs.twimg.com/media/CT4udn0WwAA0aMy.jpg   
+          1  666029285002620928  https://pbs.twimg.com/media/CT42GRgUYAA5iDo.jpg   
+          2  666033412701032449  https://pbs.twimg.com/media/CT4521TWwAEvMyu.jpg   
+          3  666044226329800704  https://pbs.twimg.com/media/CT5Dr8HUEAA-lEu.jpg   
+          4  666049248165822465  https://pbs.twimg.com/media/CT5IQmsXIAAKY4A.jpg   
+          
+             img\_num                      p1   p1\_conf  p1\_dog                  p2  \textbackslash{}
+          0        1  Welsh\_springer\_spaniel  0.465074    True              collie   
+          1        1                 redbone  0.506826    True  miniature\_pinscher   
+          2        1         German\_shepherd  0.596461    True            malinois   
+          3        1     Rhodesian\_ridgeback  0.408143    True             redbone   
+          4        1      miniature\_pinscher  0.560311    True          Rottweiler   
+          
+              p2\_conf  p2\_dog                   p3   p3\_conf  p3\_dog  
+          0  0.156665    True    Shetland\_sheepdog  0.061428    True  
+          1  0.074192    True  Rhodesian\_ridgeback  0.072010    True  
+          2  0.138584    True           bloodhound  0.116197    True  
+          3  0.360687    True   miniature\_pinscher  0.222752    True  
+          4  0.243682    True             Doberman  0.154629    True  
+\end{Verbatim}
+            
+    Quality Issues: * We can remove img\_num, doesn't provide any valuable
+information * There are no empty values
+
+    Let's see how good the breed predictors are...
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}127}]:} \PY{c+c1}{\PYZsh{} We are checking how good the 3 predictors are a guessing whether the photo is of a dog or not}
+          \PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+                   \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+                   \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}127}]:}                 tweet\_id                                            jpg\_url  \textbackslash{}
+          6     666051853826850816    https://pbs.twimg.com/media/CT5KoJ1WoAAJash.jpg   
+          17    666104133288665088    https://pbs.twimg.com/media/CT56LSZWoAAlJj2.jpg   
+          18    666268910803644416    https://pbs.twimg.com/media/CT8QCd1WEAADXws.jpg   
+          21    666293911632134144    https://pbs.twimg.com/media/CT8mx7KW4AEQu8N.jpg   
+          25    666362758909284353    https://pbs.twimg.com/media/CT9lXGsUcAAyUFt.jpg   
+          29    666411507551481857    https://pbs.twimg.com/media/CT-RugiWIAELEaq.jpg   
+          45    666786068205871104    https://pbs.twimg.com/media/CUDmZIkWcAAIPPe.jpg   
+          50    666837028449972224    https://pbs.twimg.com/media/CUEUva1WsAA2jPb.jpg   
+          51    666983947667116034    https://pbs.twimg.com/media/CUGaXDhW4AY9JUH.jpg   
+          53    667012601033924608    https://pbs.twimg.com/media/CUG0bC0U8AAw2su.jpg   
+          56    667065535570550784    https://pbs.twimg.com/media/CUHkkJpXIAA2w3n.jpg   
+          69    667188689915760640    https://pbs.twimg.com/media/CUJUk2iWUAAVtOv.jpg   
+          73    667369227918143488    https://pbs.twimg.com/media/CUL4xR9UkAEdlJ6.jpg   
+          77    667437278097252352    https://pbs.twimg.com/media/CUM2qWaWoAUZ06L.jpg   
+          78    667443425659232256    https://pbs.twimg.com/media/CUM8QZwW4AAVsBl.jpg   
+          93    667549055577362432    https://pbs.twimg.com/media/CUOcVCwWsAERUKY.jpg   
+          94    667550882905632768    https://pbs.twimg.com/media/CUObvUJVEAAnYPF.jpg   
+          96    667724302356258817    https://pbs.twimg.com/media/CUQ7tv3W4AA3KlI.jpg   
+          98    667766675769573376    https://pbs.twimg.com/media/CURiQMnUAAAPT2M.jpg   
+          100   667782464991965184    https://pbs.twimg.com/media/CURwm3cUkAARcO6.jpg   
+          106   667866724293877760    https://pbs.twimg.com/media/CUS9PlUWwAANeAD.jpg   
+          107   667873844930215936    https://pbs.twimg.com/media/CUTDtyGXIAARxus.jpg   
+          112   667911425562669056    https://pbs.twimg.com/media/CUTl5m1WUAAabZG.jpg   
+          115   667937095915278337    https://pbs.twimg.com/media/CUT9PuQWwAABQv7.jpg   
+          117   668142349051129856    https://pbs.twimg.com/media/CUW37BzWsAAlJlN.jpg   
+          118   668154635664932864    https://pbs.twimg.com/media/CUXDGR2WcAAUQKz.jpg   
+          123   668226093875376128    https://pbs.twimg.com/media/CUYEFlQXAAUkPGm.jpg   
+          130   668291999406125056    https://pbs.twimg.com/media/CUZABzGW4AE5F0k.jpg   
+          132   668466899341221888    https://pbs.twimg.com/media/CUbfGbbWoAApZth.jpg   
+          140   668544745690562560    https://pbs.twimg.com/media/CUcl5jeWsAA6ufS.jpg   
+          {\ldots}                  {\ldots}                                                {\ldots}   
+          1839  837482249356513284    https://pbs.twimg.com/media/C59VqMUXEAAzldG.jpg   
+          1844  838916489579200512    https://pbs.twimg.com/media/C6RkiQZUsAAM4R4.jpg   
+          1847  839290600511926273    https://pbs.twimg.com/media/C6XBt9XXEAEEW9U.jpg   
+          1851  840370681858686976    https://pbs.twimg.com/media/C6mYrK0UwAANhep.jpg   
+          1853  840696689258311684    https://pbs.twimg.com/media/C6rBLenU0AAr8MN.jpg   
+          1869  844580511645339650    https://pbs.twimg.com/media/C7iNfq1W0AAcbsR.jpg   
+          1886  847962785489326080    https://pbs.twimg.com/media/C8SRpHNUIAARB3j.jpg   
+          1887  847971574464610304    https://pbs.twimg.com/media/C8SZH1EWAAAIRRF.jpg   
+          1891  849051919805034497    https://pbs.twimg.com/media/C8hwNxbXYAAwyVG.jpg   
+          1892  849336543269576704    https://pbs.twimg.com/media/C8lzFC4XcAAQxB4.jpg   
+          1900  851464819735769094    https://pbs.twimg.com/media/C9ECujZXsAAPCSM.jpg   
+          1902  851861385021730816    https://pbs.twimg.com/media/C8W6sY\_W0AEmttW.jpg   
+          1905  852226086759018497  https://pbs.twimg.com/ext\_tw\_video\_thumb/85222{\ldots}   
+          1906  852311364735569921    https://pbs.twimg.com/media/C9QEqZ7XYAIR7fS.jpg   
+          1910  853299958564483072    https://pbs.twimg.com/media/C9eHyF7XgAAOxPM.jpg   
+          1931  859074603037188101    https://pbs.twimg.com/media/C-wLyufW0AA546I.jpg   
+          1936  860184849394610176    https://pbs.twimg.com/media/C-\_9jWWUwAAnwkd.jpg   
+          1937  860276583193509888    https://pbs.twimg.com/media/C\_BQ\_NlVwAAgYGD.jpg   
+          1940  860924035999428608    https://pbs.twimg.com/media/C\_KVJjDXsAEUCWn.jpg   
+          1946  862457590147678208    https://pbs.twimg.com/media/C\_gQmaTUMAAPYSS.jpg   
+          1953  863907417377173506    https://pbs.twimg.com/media/C\_03NPeUQAAgrMl.jpg   
+          1956  864873206498414592    https://pbs.twimg.com/media/DAClmHkXcAA1kSv.jpg   
+          1975  870063196459192321    https://pbs.twimg.com/media/DBMV3NnXUAAm0Pp.jpg   
+          1979  870804317367881728    https://pbs.twimg.com/media/DBW35ZsVoAEWZUU.jpg   
+          2012  879050749262655488    https://pbs.twimg.com/media/DDMD\_phXoAQ1qf0.jpg   
+          2021  880935762899988482    https://pbs.twimg.com/media/DDm2Z5aXUAEDS2u.jpg   
+          2022  881268444196462592    https://pbs.twimg.com/media/DDrk-f9WAAI-WQv.jpg   
+          2046  886680336477933568    https://pbs.twimg.com/media/DE4fEDzWAAAyHMM.jpg   
+          2052  887517139158093824  https://pbs.twimg.com/ext\_tw\_video\_thumb/88751{\ldots}   
+          2074  892420643555336193    https://pbs.twimg.com/media/DGKD1-bXoAAIAUK.jpg   
+          
+                img\_num                p1   p1\_conf  p1\_dog                   p2  \textbackslash{}
+          6           1        box\_turtle  0.933012   False           mud\_turtle   
+          17          1               hen  0.965932   False                 cock   
+          18          1  desktop\_computer  0.086502   False                 desk   
+          21          1  three-toed\_sloth  0.914671   False                otter   
+          25          1        guinea\_pig  0.996496   False                skunk   
+          29          1              coho  0.404640   False           barracouta   
+          45          1             snail  0.999888   False                 slug   
+          50          1       triceratops  0.442113   False            armadillo   
+          51          1              swab  0.589446   False            chain\_saw   
+          53          1             hyena  0.987230   False  African\_hunting\_dog   
+          56          1     jigsaw\_puzzle  0.560001   False              doormat   
+          69          1            vacuum  0.335830   False                 swab   
+          73          1             teddy  0.709545   False           bath\_towel   
+          77          1         porcupine  0.989154   False           bath\_towel   
+          78          1             goose  0.980815   False                drake   
+          93          1      electric\_fan  0.984377   False            spotlight   
+          94          1          web\_site  0.998258   False           dishwasher   
+          96          1              ibex  0.619098   False              bighorn   
+          98          1       fire\_engine  0.883493   False            tow\_truck   
+          100         1          lorikeet  0.466149   False          hummingbird   
+          106         1     jigsaw\_puzzle  1.000000   False           prayer\_rug   
+          107         1     common\_iguana  0.999647   False       frilled\_lizard   
+          112         1    frilled\_lizard  0.257695   False                   ox   
+          115         1           hamster  0.172078   False           guinea\_pig   
+          117         1            Angora  0.918834   False                  hen   
+          118         1        Arctic\_fox  0.473584   False              wallaby   
+          123         1          trombone  0.390339   False               cornet   
+          130         1          web\_site  0.995535   False                skunk   
+          132         1   shopping\_basket  0.398361   False               hamper   
+          140         1          bearskin  0.427870   False                  bow   
+          {\ldots}       {\ldots}               {\ldots}       {\ldots}     {\ldots}                  {\ldots}   
+          1839        2         birdhouse  0.541196   False           can\_opener   
+          1844        2          web\_site  0.993651   False              monitor   
+          1847        1          web\_site  0.670892   False              monitor   
+          1851        1            teapot  0.981819   False                  cup   
+          1853        1          web\_site  0.841768   False                 rule   
+          1869        1            washer  0.903064   False           dishwasher   
+          1886        1          sea\_lion  0.882654   False                 mink   
+          1887        1        coffee\_mug  0.633652   False                  cup   
+          1891        1          fountain  0.997509   False  American\_black\_bear   
+          1892        1             patio  0.521788   False               prison   
+          1900        2          web\_site  0.919649   False                 menu   
+          1902        1        pencil\_box  0.662183   False                purse   
+          1905        1            prison  0.352793   False           dishwasher   
+          1906        1           barbell  0.971581   False             dumbbell   
+          1910        1            grille  0.652280   False          beach\_wagon   
+          1931        1          revolver  0.190292   False           projectile   
+          1936        1        chimpanzee  0.267612   False              gorilla   
+          1937        1          lakeside  0.312299   False                 dock   
+          1940        2          envelope  0.933016   False         oscilloscope   
+          1946        1      home\_theater  0.496348   False         studio\_couch   
+          1953        1            marmot  0.358828   False              meerkat   
+          1956        2              pole  0.478616   False             lakeside   
+          1975        1        comic\_book  0.534409   False             envelope   
+          1979        1      home\_theater  0.168290   False              sandbar   
+          2012        1             tabby  0.311861   False        window\_screen   
+          2021        1       street\_sign  0.251801   False             umbrella   
+          2022        1            tusker  0.473303   False      Indian\_elephant   
+          2046        1       convertible  0.738995   False           sports\_car   
+          2052        1         limousine  0.130432   False            tow\_truck   
+          2074        1            orange  0.097049   False                bagel   
+          
+                     p2\_conf  p2\_dog                  p3       p3\_conf  p3\_dog  
+          6     4.588540e-02   False            terrapin  1.788530e-02   False  
+          17    3.391940e-02   False           partridge  5.206580e-05   False  
+          18    8.554740e-02   False            bookcase  7.947970e-02   False  
+          21    1.525000e-02   False      great\_grey\_owl  1.320720e-02   False  
+          25    2.402450e-03   False             hamster  4.608630e-04   False  
+          29    2.714850e-01   False                 gar  1.899450e-01   False  
+          45    5.514170e-05   False               acorn  2.625800e-05   False  
+          50    1.140710e-01   False       common\_iguana  4.325530e-02   False  
+          51    1.901420e-01   False                 wig  3.450970e-02   False  
+          53    1.260080e-02   False              coyote  5.735010e-05   False  
+          56    1.032590e-01   False        space\_heater  4.256800e-02   False  
+          69    2.652780e-01   False       toilet\_tissue  1.407030e-01   False  
+          73    1.272850e-01   False  Christmas\_stocking  2.856750e-02   False  
+          77    6.300490e-03   False              badger  9.663400e-04   False  
+          78    6.917770e-03   False                 hen  5.255170e-03   False  
+          93    7.736710e-03   False           lampshade  1.901230e-03   False  
+          94    2.010840e-04   False        oscilloscope  1.417360e-04   False  
+          96    1.251190e-01   False                 ram  7.467320e-02   False  
+          98    7.473390e-02   False                jeep  1.277260e-02   False  
+          100   8.301100e-02   False        African\_grey  5.424740e-02   False  
+          106   1.011300e-08   False             doormat  1.740170e-10   False  
+          107   1.811500e-04   False   African\_chameleon  1.283570e-04   False  
+          112   2.351600e-01   False         triceratops  8.531690e-02   False  
+          115   9.492420e-02   False            Band\_Aid  5.999520e-02   False  
+          117   3.779340e-02   False         wood\_rabbit  1.101490e-02   False  
+          118   2.614110e-01   False          white\_wolf  8.094780e-02   False  
+          123   3.141490e-01   False         French\_horn  2.551820e-01   False  
+          130   1.363490e-03   False              badger  6.856500e-04   False  
+          132   3.632220e-01   False            bassinet  8.417350e-02   False  
+          140   2.588580e-01   False             panpipe  2.156260e-02   False  
+          {\ldots}            {\ldots}     {\ldots}                 {\ldots}           {\ldots}     {\ldots}  
+          1839  1.210940e-01   False              carton  5.613670e-02   False  
+          1844  1.405900e-03   False            envelope  1.093090e-03   False  
+          1847  1.015650e-01   False              screen  7.530610e-02   False  
+          1851  1.402580e-02   False           coffeepot  2.420540e-03   False  
+          1853  7.087310e-03   False            envelope  6.820300e-03   False  
+          1869  3.248900e-02   False             printer  1.645620e-02   False  
+          1886  6.688020e-02   False               otter  2.567870e-02   False  
+          1887  2.733920e-01   False       toilet\_tissue  6.665580e-02   False  
+          1891  1.413120e-03   False             sundial  6.811150e-04   False  
+          1892  1.495440e-01   False          restaurant  2.715260e-02   False  
+          1900  2.630610e-02   False    crossword\_puzzle  3.481510e-03   False  
+          1902  6.650550e-02   False              pillow  4.472530e-02   False  
+          1905  1.107230e-01   False                file  9.411200e-02   False  
+          1906  2.841790e-02   False             go-kart  5.595040e-07   False  
+          1910  1.128460e-01   False         convertible  8.625230e-02   False  
+          1931  1.490640e-01   False            fountain  6.604660e-02   False  
+          1936  1.042930e-01   False           orangutan  5.990750e-02   False  
+          1937  1.598420e-01   False               canoe  7.079450e-02   False  
+          1940  1.259140e-02   False         paper\_towel  1.117850e-02   False  
+          1946  1.672560e-01   False        barber\_chair  5.262500e-02   False  
+          1953  1.747030e-01   False              weasel  1.234850e-01   False  
+          1956  1.141820e-01   False               wreck  5.592650e-02   False  
+          1975  2.807220e-01   False         book\_jacket  4.378550e-02   False  
+          1979  9.804040e-02   False          television  7.972940e-02   False  
+          2012  1.691230e-01   False        Egyptian\_cat  1.329320e-01   False  
+          2021  1.151230e-01   False       traffic\_light  6.953380e-02   False  
+          2022  2.456460e-01   False                ibex  5.566070e-02   False  
+          2046  1.399520e-01   False           car\_wheel  4.417270e-02   False  
+          2052  2.917540e-02   False       shopping\_cart  2.632080e-02   False  
+          2074  8.585110e-02   False              banana  7.611000e-02   False  
+          
+          [324 rows x 12 columns]
+\end{Verbatim}
+            
+    324/2075 tweets were unanimously predicted as not dogs
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}128}]:} \PY{c+c1}{\PYZsh{} Lets see how the 1st predictor tested out}
+          \PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}128}]:}                 tweet\_id                                            jpg\_url  \textbackslash{}
+          0     666020888022790149    https://pbs.twimg.com/media/CT4udn0WwAA0aMy.jpg   
+          1     666029285002620928    https://pbs.twimg.com/media/CT42GRgUYAA5iDo.jpg   
+          2     666033412701032449    https://pbs.twimg.com/media/CT4521TWwAEvMyu.jpg   
+          3     666044226329800704    https://pbs.twimg.com/media/CT5Dr8HUEAA-lEu.jpg   
+          4     666049248165822465    https://pbs.twimg.com/media/CT5IQmsXIAAKY4A.jpg   
+          5     666050758794694657    https://pbs.twimg.com/media/CT5Jof1WUAEuVxN.jpg   
+          7     666055525042405380    https://pbs.twimg.com/media/CT5N9tpXIAAifs1.jpg   
+          9     666058600524156928    https://pbs.twimg.com/media/CT5Qw94XAAA\_2dP.jpg   
+          10    666063827256086533    https://pbs.twimg.com/media/CT5Vg\_wXIAAXfnj.jpg   
+          11    666071193221509120    https://pbs.twimg.com/media/CT5cN\_3WEAAlOoZ.jpg   
+          12    666073100786774016    https://pbs.twimg.com/media/CT5d9DZXAAALcwe.jpg   
+          13    666082916733198337    https://pbs.twimg.com/media/CT5m4VGWEAAtKc8.jpg   
+          14    666094000022159362    https://pbs.twimg.com/media/CT5w9gUW4AAsBNN.jpg   
+          15    666099513787052032    https://pbs.twimg.com/media/CT51-JJUEAA6hV8.jpg   
+          16    666102155909144576    https://pbs.twimg.com/media/CT54YGiWUAEZnoK.jpg   
+          19    666273097616637952    https://pbs.twimg.com/media/CT8T1mtUwAA3aqm.jpg   
+          20    666287406224695296    https://pbs.twimg.com/media/CT8g3BpUEAAuFjg.jpg   
+          23    666345417576210432    https://pbs.twimg.com/media/CT9Vn7PWoAA\_ZCM.jpg   
+          24    666353288456101888    https://pbs.twimg.com/media/CT9cx0tUEAAhNN\_.jpg   
+          26    666373753744588802    https://pbs.twimg.com/media/CT9vZEYWUAAlZ05.jpg   
+          27    666396247373291520    https://pbs.twimg.com/media/CT-D2ZHWIAA3gK1.jpg   
+          28    666407126856765440    https://pbs.twimg.com/media/CT-NvwmW4AAugGZ.jpg   
+          30    666418789513326592    https://pbs.twimg.com/media/CT-YWb7U8AA7QnN.jpg   
+          31    666421158376562688    https://pbs.twimg.com/media/CT-aggCXAAIMfT3.jpg   
+          32    666428276349472768    https://pbs.twimg.com/media/CT-g-0DUwAEQdSn.jpg   
+          34    666435652385423360    https://pbs.twimg.com/media/CT-nsTQWEAEkyDn.jpg   
+          35    666437273139982337    https://pbs.twimg.com/media/CT-pKmRWIAAxUWj.jpg   
+          36    666447344410484738    https://pbs.twimg.com/media/CT-yU5QWwAEjLX5.jpg   
+          37    666454714377183233    https://pbs.twimg.com/media/CT-5Bs-WUAA2JeC.jpg   
+          38    666644823164719104    https://pbs.twimg.com/media/CUBl6IwVAAA9\_zT.jpg   
+          {\ldots}                  {\ldots}                                                {\ldots}   
+          2041  885311592912609280    https://pbs.twimg.com/media/C4bTH6nWMAAX\_bJ.jpg   
+          2042  885528943205470208    https://pbs.twimg.com/media/DEoH3yvXgAAzQtS.jpg   
+          2043  885984800019947520    https://pbs.twimg.com/media/DEumeWWV0AA-Z61.jpg   
+          2044  886258384151887873    https://pbs.twimg.com/media/DEyfTG4UMAE4aE9.jpg   
+          2045  886366144734445568    https://pbs.twimg.com/media/DE0BTnQUwAApKEH.jpg   
+          2047  886736880519319552    https://pbs.twimg.com/media/DE5Se8FXcAAJFx4.jpg   
+          2048  886983233522544640    https://pbs.twimg.com/media/DE8yicJW0AAAvBJ.jpg   
+          2049  887101392804085760    https://pbs.twimg.com/media/DE-eAq6UwAA-jaE.jpg   
+          2050  887343217045368832  https://pbs.twimg.com/ext\_tw\_video\_thumb/88734{\ldots}   
+          2051  887473957103951883    https://pbs.twimg.com/media/DFDw2tyUQAAAFke.jpg   
+          2053  887705289381826560    https://pbs.twimg.com/media/DFHDQBbXgAEqY7t.jpg   
+          2054  888078434458587136    https://pbs.twimg.com/media/DFMWn56WsAAkA7B.jpg   
+          2055  888202515573088257    https://pbs.twimg.com/media/DFDw2tyUQAAAFke.jpg   
+          2056  888554962724278272    https://pbs.twimg.com/media/DFTH\_O-UQAACu20.jpg   
+          2057  888804989199671297    https://pbs.twimg.com/media/DFWra-3VYAA2piG.jpg   
+          2058  888917238123831296    https://pbs.twimg.com/media/DFYRgsOUQAARGhO.jpg   
+          2059  889278841981685760  https://pbs.twimg.com/ext\_tw\_video\_thumb/88927{\ldots}   
+          2060  889531135344209921    https://pbs.twimg.com/media/DFg\_2PVW0AEHN3p.jpg   
+          2061  889638837579907072    https://pbs.twimg.com/media/DFihzFfXsAYGDPR.jpg   
+          2062  889665388333682689    https://pbs.twimg.com/media/DFi579UWsAAatzw.jpg   
+          2063  889880896479866881    https://pbs.twimg.com/media/DFl99B1WsAITKsg.jpg   
+          2064  890006608113172480    https://pbs.twimg.com/media/DFnwSY4WAAAMliS.jpg   
+          2065  890240255349198849    https://pbs.twimg.com/media/DFrEyVuW0AAO3t9.jpg   
+          2066  890609185150312448    https://pbs.twimg.com/media/DFwUU\_\_XcAEpyXI.jpg   
+          2067  890729181411237888    https://pbs.twimg.com/media/DFyBahAVwAAhUTd.jpg   
+          2068  890971913173991426    https://pbs.twimg.com/media/DF1eOmZXUAALUcq.jpg   
+          2069  891087950875897856    https://pbs.twimg.com/media/DF3HwyEWsAABqE6.jpg   
+          2070  891327558926688256    https://pbs.twimg.com/media/DF6hr6BUMAAzZgT.jpg   
+          2072  891815181378084864    https://pbs.twimg.com/media/DGBdLU1WsAANxJ9.jpg   
+          2073  892177421306343426    https://pbs.twimg.com/media/DGGmoV4XsAAUL6n.jpg   
+          
+                img\_num                           p1   p1\_conf  p1\_dog  \textbackslash{}
+          0           1       Welsh\_springer\_spaniel  0.465074    True   
+          1           1                      redbone  0.506826    True   
+          2           1              German\_shepherd  0.596461    True   
+          3           1          Rhodesian\_ridgeback  0.408143    True   
+          4           1           miniature\_pinscher  0.560311    True   
+          5           1         Bernese\_mountain\_dog  0.651137    True   
+          7           1                         chow  0.692517    True   
+          9           1             miniature\_poodle  0.201493    True   
+          10          1             golden\_retriever  0.775930    True   
+          11          1                Gordon\_setter  0.503672    True   
+          12          1                 Walker\_hound  0.260857    True   
+          13          1                          pug  0.489814    True   
+          14          1                   bloodhound  0.195217    True   
+          15          1                        Lhasa  0.582330    True   
+          16          1               English\_setter  0.298617    True   
+          19          1            Italian\_greyhound  0.176053    True   
+          20          1                  Maltese\_dog  0.857531    True   
+          23          1             golden\_retriever  0.858744    True   
+          24          1                     malamute  0.336874    True   
+          26          1  soft-coated\_wheaten\_terrier  0.326467    True   
+          27          1                    Chihuahua  0.978108    True   
+          28          1      black-and-tan\_coonhound  0.529139    True   
+          30          1                  toy\_terrier  0.149680    True   
+          31          1             Blenheim\_spaniel  0.906777    True   
+          32          1                     Pembroke  0.371361    True   
+          34          1     Chesapeake\_Bay\_retriever  0.184130    True   
+          35          1                    Chihuahua  0.671853    True   
+          36          1       curly-coated\_retriever  0.322084    True   
+          37          1                    dalmatian  0.278954    True   
+          38          1                 Ibizan\_hound  0.044333    True   
+          {\ldots}       {\ldots}                          {\ldots}       {\ldots}     {\ldots}   
+          2041        1           Labrador\_retriever  0.908703    True   
+          2042        1                          pug  0.369275    True   
+          2043        1             Blenheim\_spaniel  0.972494    True   
+          2044        1                          pug  0.943575    True   
+          2045        1               French\_bulldog  0.999201    True   
+          2047        1                       kuvasz  0.309706    True   
+          2048        2                    Chihuahua  0.793469    True   
+          2049        1                      Samoyed  0.733942    True   
+          2050        1             Mexican\_hairless  0.330741    True   
+          2051        2                     Pembroke  0.809197    True   
+          2053        1                       basset  0.821664    True   
+          2054        1               French\_bulldog  0.995026    True   
+          2055        2                     Pembroke  0.809197    True   
+          2056        3               Siberian\_husky  0.700377    True   
+          2057        1             golden\_retriever  0.469760    True   
+          2058        1             golden\_retriever  0.714719    True   
+          2059        1                      whippet  0.626152    True   
+          2060        1             golden\_retriever  0.953442    True   
+          2061        1               French\_bulldog  0.991650    True   
+          2062        1                     Pembroke  0.966327    True   
+          2063        1               French\_bulldog  0.377417    True   
+          2064        1                      Samoyed  0.957979    True   
+          2065        1                     Pembroke  0.511319    True   
+          2066        1                Irish\_terrier  0.487574    True   
+          2067        2                   Pomeranian  0.566142    True   
+          2068        1                  Appenzeller  0.341703    True   
+          2069        1     Chesapeake\_Bay\_retriever  0.425595    True   
+          2070        2                       basset  0.555712    True   
+          2072        1                    Chihuahua  0.716012    True   
+          2073        1                    Chihuahua  0.323581    True   
+          
+                                      p2   p2\_conf  p2\_dog                           p3  \textbackslash{}
+          0                       collie  0.156665    True            Shetland\_sheepdog   
+          1           miniature\_pinscher  0.074192    True          Rhodesian\_ridgeback   
+          2                     malinois  0.138584    True                   bloodhound   
+          3                      redbone  0.360687    True           miniature\_pinscher   
+          4                   Rottweiler  0.243682    True                     Doberman   
+          5             English\_springer  0.263788    True   Greater\_Swiss\_Mountain\_dog   
+          7              Tibetan\_mastiff  0.058279    True                     fur\_coat   
+          9                     komondor  0.192305    True  soft-coated\_wheaten\_terrier   
+          10             Tibetan\_mastiff  0.093718    True           Labrador\_retriever   
+          11           Yorkshire\_terrier  0.174201    True                     Pekinese   
+          12            English\_foxhound  0.175382    True                 Ibizan\_hound   
+          13                bull\_mastiff  0.404722    True               French\_bulldog   
+          14             German\_shepherd  0.078260    True                     malinois   
+          15                    Shih-Tzu  0.166192    True               Dandie\_Dinmont   
+          16                Newfoundland  0.149842    True                       borzoi   
+          19                 toy\_terrier  0.111884    True                      basenji   
+          20                  toy\_poodle  0.063064    True             miniature\_poodle   
+          23    Chesapeake\_Bay\_retriever  0.054787    True           Labrador\_retriever   
+          24              Siberian\_husky  0.147655    True                   Eskimo\_dog   
+          26                Afghan\_hound  0.259551    True                       briard   
+          27                 toy\_terrier  0.009397    True                     papillon   
+          28                  bloodhound  0.244220    True        flat-coated\_retriever   
+          30                    papillon  0.148258    True                    Chihuahua   
+          31              cocker\_spaniel  0.090346    True                     Shih-Tzu   
+          32                        chow  0.249394    True                   Pomeranian   
+          34                   chain\_saw  0.056775   False                  power\_drill   
+          35                      beagle  0.124680    True                       Saluki   
+          36             giant\_schnauzer  0.287955    True           Labrador\_retriever   
+          37          Labrador\_retriever  0.237612    True               Great\_Pyrenees   
+          38                    Pembroke  0.043209    True  West\_Highland\_white\_terrier   
+          {\ldots}                        {\ldots}       {\ldots}     {\ldots}                          {\ldots}   
+          2041                 seat\_belt  0.057091   False                          pug   
+          2042        Labrador\_retriever  0.265835    True                       kuvasz   
+          2043                  Shih-Tzu  0.006630    True         Bernese\_mountain\_dog   
+          2044                shower\_cap  0.025286   False                  Siamese\_cat   
+          2045                 Chihuahua  0.000361    True                  Boston\_bull   
+          2047            Great\_Pyrenees  0.186136    True               Dandie\_Dinmont   
+          2048               toy\_terrier  0.143528    True                   can\_opener   
+          2049                Eskimo\_dog  0.035029    True    Staffordshire\_bullterrier   
+          2050                  sea\_lion  0.275645   False                   Weimaraner   
+          2051       Rhodesian\_ridgeback  0.054950    True                       beagle   
+          2053                   redbone  0.087582    True                   Weimaraner   
+          2054                       pug  0.000932    True                 bull\_mastiff   
+          2055       Rhodesian\_ridgeback  0.054950    True                       beagle   
+          2056                Eskimo\_dog  0.166511    True                     malamute   
+          2057        Labrador\_retriever  0.184172    True               English\_setter   
+          2058           Tibetan\_mastiff  0.120184    True           Labrador\_retriever   
+          2059                    borzoi  0.194742    True                       Saluki   
+          2060        Labrador\_retriever  0.013834    True                      redbone   
+          2061                     boxer  0.002129    True    Staffordshire\_bullterrier   
+          2062                  Cardigan  0.027356    True                      basenji   
+          2063        Labrador\_retriever  0.151317    True                       muzzle   
+          2064                Pomeranian  0.013884    True                         chow   
+          2065                  Cardigan  0.451038    True                    Chihuahua   
+          2066              Irish\_setter  0.193054    True     Chesapeake\_Bay\_retriever   
+          2067                Eskimo\_dog  0.178406    True                     Pembroke   
+          2068             Border\_collie  0.199287    True                    ice\_lolly   
+          2069             Irish\_terrier  0.116317    True              Indian\_elephant   
+          2070          English\_springer  0.225770    True  German\_short-haired\_pointer   
+          2072                  malamute  0.078253    True                       kelpie   
+          2073                  Pekinese  0.090647    True                     papillon   
+          
+                 p3\_conf  p3\_dog  
+          0     0.061428    True  
+          1     0.072010    True  
+          2     0.116197    True  
+          3     0.222752    True  
+          4     0.154629    True  
+          5     0.016199    True  
+          7     0.054449   False  
+          9     0.082086    True  
+          10    0.072427    True  
+          11    0.109454    True  
+          12    0.097471    True  
+          13    0.048960    True  
+          14    0.075628    True  
+          15    0.089688    True  
+          16    0.133649    True  
+          19    0.111152    True  
+          20    0.025581    True  
+          23    0.014241    True  
+          24    0.093412    True  
+          26    0.206803    True  
+          27    0.004577    True  
+          28    0.173810    True  
+          30    0.142860    True  
+          31    0.001117    True  
+          32    0.241878    True  
+          34    0.036763   False  
+          35    0.044094    True  
+          36    0.166331    True  
+          37    0.171106    True  
+          38    0.038906    True  
+          {\ldots}        {\ldots}     {\ldots}  
+          2041  0.011933    True  
+          2042  0.134697    True  
+          2043  0.006239    True  
+          2044  0.002849   False  
+          2045  0.000076    True  
+          2047  0.086346    True  
+          2048  0.032253   False  
+          2049  0.029705    True  
+          2050  0.134203    True  
+          2051  0.038915    True  
+          2053  0.026236    True  
+          2054  0.000903    True  
+          2055  0.038915    True  
+          2056  0.111411    True  
+          2057  0.073482    True  
+          2058  0.105506    True  
+          2059  0.027351    True  
+          2060  0.007958    True  
+          2061  0.001498    True  
+          2062  0.004633    True  
+          2063  0.082981   False  
+          2064  0.008167    True  
+          2065  0.029248    True  
+          2066  0.118184    True  
+          2067  0.076507    True  
+          2068  0.193548   False  
+          2069  0.076902   False  
+          2070  0.175219    True  
+          2072  0.031379    True  
+          2073  0.068957    True  
+          
+          [1532 rows x 12 columns]
+\end{Verbatim}
+            
+    1532/2075 were dogs from the 1st predictor
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}129}]:} \PY{c+c1}{\PYZsh{} Checking selection when the 2nd or 3rd probabilities are dogs}
+          \PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{p}{(}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+                   \PY{p}{(}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{)} \PY{o}{|}
+                   \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{True}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{]}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}129}]:}                 tweet\_id                                            jpg\_url  \textbackslash{}
+          8     666057090499244032    https://pbs.twimg.com/media/CT5PY90WoAAQGLo.jpg   
+          22    666337882303524864    https://pbs.twimg.com/media/CT9OwFIWEAMuRje.jpg   
+          33    666430724426358785    https://pbs.twimg.com/media/CT-jNYqW4AAPi2M.jpg   
+          43    666776908487630848    https://pbs.twimg.com/media/CUDeDoWUYAAD-EM.jpg   
+          52    666996132027977728    https://pbs.twimg.com/media/CUGlb6iUwAITEbW.jpg   
+          87    667524857454854144    https://pbs.twimg.com/media/CUOGUfJW4AA\_eni.jpg   
+          95    667550904950915073    https://pbs.twimg.com/media/CUOb\_gUUkAACXdS.jpg   
+          103   667806454573760512    https://pbs.twimg.com/media/CUSGbXeVAAAgztZ.jpg   
+          108   667878741721415682    https://pbs.twimg.com/media/CUTILFiWcAE8Rle.jpg   
+          113   667915453470232577    https://pbs.twimg.com/media/CUTpj-GWcAATc6A.jpg   
+          126   668256321989451776    https://pbs.twimg.com/media/CUYflCXWEAAzQVu.jpg   
+          131   668297328638447616    https://pbs.twimg.com/media/CUZE4IWW4AAZmDf.jpg   
+          133   668480044826800133    https://pbs.twimg.com/media/CUbrDWOWcAEyMdM.jpg   
+          145   668625577880875008    https://pbs.twimg.com/media/CUdvambWoAA007z.jpg   
+          150   668641109086707712    https://pbs.twimg.com/media/CUd9ivxWUAAuXSQ.jpg   
+          158   668872652652679168    https://pbs.twimg.com/media/CUhQIAhXAAA2j7u.jpg   
+          163   668960084974809088    https://pbs.twimg.com/media/CUifpn4WUAAS5X3.jpg   
+          167   668986018524233728    https://pbs.twimg.com/media/CUi3PIrWoAAPvPT.jpg   
+          171   668994913074286592    https://pbs.twimg.com/media/CUi\_UtnWIAEtfqz.jpg   
+          179   669324657376567296    https://pbs.twimg.com/media/CUnrN7vUcAAfGvN.jpg   
+          183   669353438988365824    https://pbs.twimg.com/media/CUoFZTyW4AE70iD.jpg   
+          198   669625907762618368    https://pbs.twimg.com/media/CUr9NjgU8AEpf5w.jpg   
+          210   669993076832759809    https://pbs.twimg.com/media/CUxLJO8U8AAu6Zu.jpg   
+          213   670040295598354432    https://pbs.twimg.com/media/CUx2F6lVEAAvFev.jpg   
+          235   670427002554466305    https://pbs.twimg.com/media/CU3VzVwWwAAAsst.jpg   
+          237   670433248821026816    https://pbs.twimg.com/media/CU3be0SWEAEqb7I.jpg   
+          238   670434127938719744    https://pbs.twimg.com/media/CU3cSG8W4AIAePH.jpg   
+          239   670435821946826752    https://pbs.twimg.com/media/CU3d0azWUAA38FD.jpg   
+          243   670452855871037440    https://pbs.twimg.com/media/CU3tUC4WEAAoZby.jpg   
+          261   670786190031921152    https://pbs.twimg.com/media/CU8ceuxWUAALMEo.jpg   
+          {\ldots}                  {\ldots}                                                {\ldots}   
+          1748  823581115634085888    https://pbs.twimg.com/media/C23ypm6VQAAO31l.jpg   
+          1761  826115272272650244    https://pbs.twimg.com/media/C3bzVILWcAUjS5i.jpg   
+          1779  828409743546925057    https://pbs.twimg.com/media/C38aQYgXAAMY2Wh.jpg   
+          1781  828708714936930305    https://pbs.twimg.com/media/C4AqLSgVYAEg8nt.jpg   
+          1782  828770345708580865    https://pbs.twimg.com/media/C4BiOXOXAAAf6IS.jpg   
+          1817  834086379323871233    https://pbs.twimg.com/media/C5NFIsjWQAEI93t.jpg   
+          1821  834574053763584002    https://pbs.twimg.com/media/C5UAqgyXAAAbMWH.jpg   
+          1823  834931633769889797    https://pbs.twimg.com/media/C5ZF4p-XEAEmApg.jpg   
+          1824  835152434251116546    https://pbs.twimg.com/media/C5cOtWVWMAEjO5p.jpg   
+          1826  835264098648616962    https://pbs.twimg.com/media/C5d0QtvXMAI\_7uz.jpg   
+          1833  836753516572119041    https://pbs.twimg.com/media/C5y-4VwWcAIcaoj.jpg   
+          1834  836989968035819520    https://pbs.twimg.com/media/C52V7PzWcAA\_pVv.jpg   
+          1848  839549326359670784    https://pbs.twimg.com/media/C6atpTLWYAIL7bU.jpg   
+          1856  841439858740625411    https://pbs.twimg.com/media/C61lFFiWoAAJdiL.jpg   
+          1858  841833993020538882  https://pbs.twimg.com/ext\_tw\_video\_thumb/81742{\ldots}   
+          1862  842765311967449089    https://pbs.twimg.com/media/C7IalMVX0AATKRD.jpg   
+          1872  844979544864018432    https://pbs.twimg.com/media/C7n4aQ0VAAAohkL.jpg   
+          1881  847116187444137987    https://pbs.twimg.com/media/C8GPrNDW4AAkLde.jpg   
+          1896  850145622816686080    https://pbs.twimg.com/media/C8xS655XkAAv9vo.jpg   
+          1899  851224888060895234    https://pbs.twimg.com/media/C9AohFoWsAUmxDs.jpg   
+          1904  852189679701164033    https://pbs.twimg.com/media/C9OV99SXsAEmj1U.jpg   
+          1932  859196978902773760  https://pbs.twimg.com/ext\_tw\_video\_thumb/85919{\ldots}   
+          1942  861288531465048066  https://pbs.twimg.com/ext\_tw\_video\_thumb/86128{\ldots}   
+          1944  861769973181624320    https://pbs.twimg.com/media/CzG425nWgAAnP7P.jpg   
+          1970  868880397819494401    https://pbs.twimg.com/media/DA7iHL5U0AA1OQo.jpg   
+          1984  872122724285648897    https://pbs.twimg.com/media/DBpm-5UXcAUeCru.jpg   
+          1992  873697596434513921    https://pbs.twimg.com/media/DA7iHL5U0AA1OQo.jpg   
+          2013  879376492567855104    https://pbs.twimg.com/media/DDQsQGFV0AAw6u9.jpg   
+          2026  882045870035918850    https://pbs.twimg.com/media/DD2oCl2WAAEI\_4a.jpg   
+          2071  891689557279858688    https://pbs.twimg.com/media/DF\_q7IAWsAEuuN8.jpg   
+          
+                img\_num                  p1   p1\_conf  p1\_dog  \textbackslash{}
+          8           1       shopping\_cart  0.962465   False   
+          22          1                  ox  0.416669   False   
+          33          1               llama  0.505184   False   
+          43          1           seat\_belt  0.375057   False   
+          52          1                 hay  0.507637   False   
+          87          1                hare  0.447893   False   
+          95          1            web\_site  0.999335   False   
+          103         1             toyshop  0.253089   False   
+          108         1           seat\_belt  0.200373   False   
+          113         1  leatherback\_turtle  0.452517   False   
+          126         1               canoe  0.407683   False   
+          131         1        king\_penguin  0.606747   False   
+          133         1          Arctic\_fox  0.119243   False   
+          145         1                  ox  0.071536   False   
+          150         1              vacuum  0.432594   False   
+          158         1               teddy  0.413379   False   
+          163         1      shower\_curtain  0.226309   False   
+          167         1             doormat  0.976103   False   
+          171         1                 hog  0.113789   False   
+          179         1            seashore  0.201659   False   
+          183         1               teddy  0.379656   False   
+          198         1           seat\_belt  0.874502   False   
+          210         1          piggy\_bank  0.176320   False   
+          213         1            web\_site  0.901552   False   
+          235         1           seat\_belt  0.952258   False   
+          237         1        window\_shade  0.583427   False   
+          238         1     jack-o'-lantern  0.919140   False   
+          239         1              sorrel  0.460370   False   
+          243         1          Arctic\_fox  0.188174   False   
+          261         1               dingo  0.777124   False   
+          {\ldots}       {\ldots}                 {\ldots}       {\ldots}     {\ldots}   
+          1748        1               dingo  0.280949   False   
+          1761        1         tennis\_ball  0.997071   False   
+          1779        1               teddy  0.908457   False   
+          1781        1        hippopotamus  0.942911   False   
+          1782        1           seat\_belt  0.765979   False   
+          1817        1          bath\_towel  0.736759   False   
+          1821        1       toilet\_tissue  0.262936   False   
+          1823        1            ice\_bear  0.330573   False   
+          1824        3               swing  0.967066   False   
+          1826        2               hyena  0.736871   False   
+          1833        1         mortarboard  0.936882   False   
+          1834        1       shopping\_cart  0.572422   False   
+          1848        1               swing  0.393527   False   
+          1856        3    military\_uniform  0.853684   False   
+          1858        1            ice\_bear  0.336200   False   
+          1862        1                 tub  0.665238   False   
+          1872        3         tennis\_ball  0.999281   False   
+          1881        1          white\_wolf  0.128935   False   
+          1896        2         tennis\_ball  0.714798   False   
+          1899        3          car\_mirror  0.971512   False   
+          1904        1              barrow  0.423150   False   
+          1932        1              Angora  0.224218   False   
+          1942        1             syringe  0.144712   False   
+          1944        2       Arabian\_camel  0.366248   False   
+          1970        1              laptop  0.153718   False   
+          1984        1          basketball  0.808396   False   
+          1992        1              laptop  0.153718   False   
+          2013        1            tricycle  0.663601   False   
+          2026        1            web\_site  0.949591   False   
+          2071        1         paper\_towel  0.170278   False   
+          
+                                            p2   p2\_conf  p2\_dog  \textbackslash{}
+          8                    shopping\_basket  0.014594   False   
+          22                      Newfoundland  0.278407    True   
+          33                     Irish\_terrier  0.104109    True   
+          43                miniature\_pinscher  0.167175    True   
+          52                        Rottweiler  0.062490    True   
+          87                             dhole  0.092435   False   
+          95                            vizsla  0.000081    True   
+          103                        Chihuahua  0.187155    True   
+          108               miniature\_pinscher  0.106003    True   
+          113                            boxer  0.196655    True   
+          126                           paddle  0.115550   False   
+          131                         ice\_bear  0.264221   False   
+          133               Labrador\_retriever  0.099965    True   
+          145                      groenendael  0.054455    True   
+          150                              pug  0.146311    True   
+          158                           pillow  0.325623   False   
+          163         Chesapeake\_Bay\_retriever  0.165878    True   
+          167                        Chihuahua  0.005640    True   
+          171                 English\_springer  0.089763    True   
+          179                         Cardigan  0.131544    True   
+          183                         Pembroke  0.212343    True   
+          198                 golden\_retriever  0.055408    True   
+          210                       hair\_spray  0.097487   False   
+          213                           borzoi  0.026660    True   
+          235                      toy\_terrier  0.038872    True   
+          237                  giant\_schnauzer  0.062215    True   
+          238         Chesapeake\_Bay\_retriever  0.027351    True   
+          239                          basenji  0.135767    True   
+          243                            indri  0.123584   False   
+          261                         Pembroke  0.127438    True   
+          {\ldots}                              {\ldots}       {\ldots}     {\ldots}   
+          1748                 German\_shepherd  0.194044    True   
+          1761                golden\_retriever  0.002331    True   
+          1779                      toy\_poodle  0.018040    True   
+          1781                Mexican\_hairless  0.008388    True   
+          1782        Chesapeake\_Bay\_retriever  0.033899    True   
+          1817                    sleeping\_bag  0.062959   False   
+          1821                golden\_retriever  0.226564    True   
+          1823     soft-coated\_wheaten\_terrier  0.196476    True   
+          1824  American\_Staffordshire\_terrier  0.012731    True   
+          1826        Chesapeake\_Bay\_retriever  0.087503    True   
+          1833                   academic\_gown  0.020815   False   
+          1834                 shopping\_basket  0.414002   False   
+          1848                 Norwich\_terrier  0.052480    True   
+          1856              Labrador\_retriever  0.048200    True   
+          1858                         Samoyed  0.201358    True   
+          1862                          bucket  0.105166   False   
+          1872                          racket  0.000370   False   
+          1881  American\_Staffordshire\_terrier  0.113434    True   
+          1896                          kelpie  0.105390    True   
+          1899                       seat\_belt  0.007063   False   
+          1904            Bernese\_mountain\_dog  0.415374    True   
+          1932                        malamute  0.216163    True   
+          1942                     oxygen\_mask  0.106684   False   
+          1944                     house\_finch  0.209852   False   
+          1970                  French\_bulldog  0.099984    True   
+          1984                             pug  0.066736    True   
+          1992                  French\_bulldog  0.099984    True   
+          2013              Labrador\_retriever  0.033496    True   
+          2026                           dhole  0.017326   False   
+          2071              Labrador\_retriever  0.168086    True   
+          
+                                       p3   p3\_conf  p3\_dog  
+          8              golden\_retriever  0.007959    True  
+          22                  groenendael  0.102643    True  
+          33                        dingo  0.062071   False  
+          43                    Chihuahua  0.086951    True  
+          52                water\_buffalo  0.048425   False  
+          87     Chesapeake\_Bay\_retriever  0.088122    True  
+          95                       collie  0.000069    True  
+          103           Brabancon\_griffon  0.112799    True  
+          108                  schipperke  0.104733    True  
+          113                    terrapin  0.160983   False  
+          126                    Pembroke  0.094429    True  
+          131                  Eskimo\_dog  0.032784    True  
+          133                         pug  0.086717    True  
+          145                      Angora  0.045028   False  
+          150               toilet\_tissue  0.024500   False  
+          158         miniature\_schnauzer  0.035537    True  
+          163                     bathtub  0.056726   False  
+          167             Norfolk\_terrier  0.003913    True  
+          171              French\_bulldog  0.082186    True  
+          179                     sandbar  0.101430   False  
+          183                        chow  0.096995    True  
+          198          Labrador\_retriever  0.026854    True  
+          210                  toy\_poodle  0.086502    True  
+          213                   Chihuahua  0.012438    True  
+          235                      beagle  0.003226    True  
+          237               window\_screen  0.039941   False  
+          238          Labrador\_retriever  0.020081    True  
+          239                    Cardigan  0.099174    True  
+          243                    malamute  0.080379    True  
+          261                    Cardigan  0.024007    True  
+          {\ldots}                         {\ldots}       {\ldots}     {\ldots}  
+          1748                   Pembroke  0.120051    True  
+          1761                     kuvasz  0.000283    True  
+          1779            standard\_poodle  0.012667    True  
+          1781                  ice\_lolly  0.006206   False  
+          1782                    polecat  0.027252   False  
+          1817         Labrador\_retriever  0.045263    True  
+          1821                    bathtub  0.078879   False  
+          1823              Irish\_terrier  0.073097    True  
+          1824  Staffordshire\_bullterrier  0.007039    True  
+          1826                    meerkat  0.042058   False  
+          1833                 schipperke  0.011564    True  
+          1834                 toy\_poodle  0.005887    True  
+          1848                   Pembroke  0.049901    True  
+          1856                groenendael  0.015394    True  
+          1858                 Eskimo\_dog  0.186789    True  
+          1862         Labrador\_retriever  0.029340    True  
+          1872          Shetland\_sheepdog  0.000132    True  
+          1881                      dingo  0.081231   False  
+          1896                   malinois  0.058553    True  
+          1899            standard\_poodle  0.005683    True  
+          1904                EntleBucher  0.067345    True  
+          1932                Persian\_cat  0.128383   False  
+          1942       Bouvier\_des\_Flandres  0.082610    True  
+          1944             cocker\_spaniel  0.046403    True  
+          1970                    printer  0.077130   False  
+          1984                  dalmatian  0.054570    True  
+          1992                    printer  0.077130   False  
+          2013                   Pembroke  0.018827    True  
+          2026           golden\_retriever  0.006941    True  
+          2071                    spatula  0.040836   False  
+          
+          [219 rows x 12 columns]
+\end{Verbatim}
+            
+    219/2075 tweets were the shown to be dogs by the predictor 2 \& 3, but
+not 1 \_\_\_ \#\#\# df\_api\_trim
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}130}]:} \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+RangeIndex: 2344 entries, 0 to 2343
+Data columns (total 3 columns):
+id                2344 non-null int64
+retweet\_count     2344 non-null int64
+favorite\_count    2344 non-null int64
+dtypes: int64(3)
+memory usage: 55.0 KB
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}131}]:}                    id  retweet\_count  favorite\_count
+          0  892420643555336193           8544           38641
+          1  892177421306343426           6285           33118
+          2  891815181378084864           4162           24932
+          3  891689557279858688           8664           42028
+          4  891327558926688256           9423           40183
+\end{Verbatim}
+            
+    Quality Issues: * id should be converted to string * there are no
+missing/empty data points
+
+    \section{Step\#3 Clean}\label{step3-clean}
+
+    \subsection{Define Steps}\label{define-steps}
+
+     1. df\_twitter\_arch\_clean: (Data from WeRateDogs Archive) 1. Remove
+shortened URL 2. Remove rows from retweets or responses 3. Remove
+useless columns (dog stage)
+
+ df\_breeds\_pred\_clean: (Image Prediction Dataframe from CNN) 4.
+Remove column "img\_num" 5. Remove rows where: p1\_dog, p2\_dog, p3\_dog
+are all False 6. Remove rows where: p2\_dog and p3\_dog are lower than
+0.2
+
+ all dataframes: 8. Convert "tweet\_id" in df\_info\_clean and
+df\_breeds\_clean as well as "id" in df\_response\_clean from integers
+to strings 9. For ID consistency: Removed ids from
+df\_breeds\_pred\_clean need to be removed from the other dataframes 10.
+For ID consistency: Removed all ids from the failed\_ids dataframe 11.
+Format the numerator and denominator using regular expressions
+
+ tidyness
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Remove the pN\_dog and pN\_conf that we don't need, we will
+  consolidate the probability column
+\item
+  Rename p1 to the predicted breed
+\item
+  Clean up the formatting of the predicted\_breed column, convert \_ to
+  " " and A to a
+\end{enumerate}
+
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Execute}\label{execute}
+
+    \subsubsection{1. df\_twitter\_arch\_clean: (Data from WeRateDogs
+Archive)}\label{df_twitter_arch_clean-data-from-weratedogs-archive}
+
+\begin{verbatim}
+1.Remove shortened URL
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}132}]:} \PY{c+c1}{\PYZsh{} Find the length of the shortened URL}
+          \PY{n}{length\PYZus{}of\PYZus{}url} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}\PY{o}{+}\PY{l+m+mi}{1}
+          
+          \PY{c+c1}{\PYZsh{} Remove the length of URLs from text entries}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{row}\PY{p}{:} \PY{n}{row}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{n}{length\PYZus{}of\PYZus{}url}\PY{p}{]}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{}Test out what we did}
+          \PY{n+nb}{print}\PY{p}{(}\PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}df\PYZus{}twitter\PYZus{}arch\PYZus{}clean.tail()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+This is Archie. He is a rare Norwegian Pouncing Corgo. Lives in the tall grass. You never know when one may strike. 12/10
+
+    \end{Verbatim}
+
+    \begin{verbatim}
+2.Remove rows from retweets or responses
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{c+c1}{\PYZsh{} Convert datatypes from integer to string}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}reply\PYZus{}to\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}reply\PYZus{}to\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{retweeted\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{retweeted\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Store the indexs of each tweet reply that is a reply in replies}
+          \PY{n}{replies} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}reply\PYZus{}to\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+          \PY{c+c1}{\PYZsh{}len(df\PYZus{}twitter\PYZus{}arch\PYZus{}clean)}
+          
+          \PY{c+c1}{\PYZsh{} Next, we need to drop the row from the indexs found above}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{replies}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}len(df\PYZus{}twitter\PYZus{}arch\PYZus{}clean)}
+          
+          \PY{c+c1}{\PYZsh{} Store the indexs of each retweet in retweets}
+          \PY{n}{retweets} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{retweeted\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{!=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{retweets}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}print(retweets)}
+          \PY{c+c1}{\PYZsh{}len(df\PYZus{}twitter\PYZus{}arch\PYZus{}clean)}
+          
+          \PY{c+c1}{\PYZsh{} Replace weird \PYZdq{}nan\PYZdq{} strings with actual NaNs}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}reply\PYZus{}to\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{retweeted\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{nan}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{nan}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}len(df\PYZus{}twitter\PYZus{}arch\PYZus{}clean)}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}133}]:}              tweet\_id  in\_reply\_to\_status\_id  in\_reply\_to\_user\_id  \textbackslash{}
+          0  892420643555336193                    NaN                  NaN   
+          1  892177421306343426                    NaN                  NaN   
+          2  891815181378084864                    NaN                  NaN   
+          3  891689557279858688                    NaN                  NaN   
+          4  891327558926688256                    NaN                  NaN   
+          
+                             timestamp  \textbackslash{}
+          0  2017-08-01 16:23:56 +0000   
+          1  2017-08-01 00:17:27 +0000   
+          2  2017-07-31 00:18:03 +0000   
+          3  2017-07-30 15:58:51 +0000   
+          4  2017-07-29 16:00:24 +0000   
+          
+                                                        source  \textbackslash{}
+          0  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          1  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          2  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          3  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          4  <a href="http://twitter.com/download/iphone" r{\ldots}   
+          
+                                                          text  retweeted\_status\_id  \textbackslash{}
+          0  This is Phineas. He's a mystical boy. Only eve{\ldots}                  NaN   
+          1  This is Tilly. She's just checking pup on you{\ldots}                  NaN   
+          2  This is Archie. He is a rare Norwegian Pouncin{\ldots}                  NaN   
+          3  This is Darla. She commenced a snooze mid meal{\ldots}                  NaN   
+          4  This is Franklin. He would like you to stop ca{\ldots}                  NaN   
+          
+             retweeted\_status\_user\_id retweeted\_status\_timestamp  \textbackslash{}
+          0                       NaN                        NaN   
+          1                       NaN                        NaN   
+          2                       NaN                        NaN   
+          3                       NaN                        NaN   
+          4                       NaN                        NaN   
+          
+                                                 expanded\_urls  rating\_numerator  \textbackslash{}
+          0  https://twitter.com/dog\_rates/status/892420643{\ldots}                13   
+          1  https://twitter.com/dog\_rates/status/892177421{\ldots}                13   
+          2  https://twitter.com/dog\_rates/status/891815181{\ldots}                12   
+          3  https://twitter.com/dog\_rates/status/891689557{\ldots}                13   
+          4  https://twitter.com/dog\_rates/status/891327558{\ldots}                12   
+          
+             rating\_denominator      name doggo floofer pupper puppo  
+          0                  10   Phineas  None    None   None  None  
+          1                  10     Tilly  None    None   None  None  
+          2                  10    Archie  None    None   None  None  
+          3                  10     Darla  None    None   None  None  
+          4                  10  Franklin  None    None   None  None  
+\end{Verbatim}
+            
+    \begin{verbatim}
+3. Remove useless columns 
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{c+c1}{\PYZsh{}Identify all the columns we want to remove}
+          \PY{n}{remove\PYZus{}cols\PYZus{}info} \PY{o}{=} \PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{source}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{expanded\PYZus{}urls}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{doggo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{floofer}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{pupper}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{puppo}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}reply\PYZus{}to\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{in\PYZus{}reply\PYZus{}to\PYZus{}user\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                             \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{retweeted\PYZus{}status\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{retweeted\PYZus{}status\PYZus{}user\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                              \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{retweeted\PYZus{}status\PYZus{}timestamp}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          
+          \PY{c+c1}{\PYZsh{}Drop the relevant columns}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{n}{remove\PYZus{}cols\PYZus{}info}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}134}]:}              tweet\_id                  timestamp  \textbackslash{}
+          0  892420643555336193  2017-08-01 16:23:56 +0000   
+          1  892177421306343426  2017-08-01 00:17:27 +0000   
+          2  891815181378084864  2017-07-31 00:18:03 +0000   
+          3  891689557279858688  2017-07-30 15:58:51 +0000   
+          4  891327558926688256  2017-07-29 16:00:24 +0000   
+          
+                                                          text  rating\_numerator  \textbackslash{}
+          0  This is Phineas. He's a mystical boy. Only eve{\ldots}                13   
+          1  This is Tilly. She's just checking pup on you{\ldots}                13   
+          2  This is Archie. He is a rare Norwegian Pouncin{\ldots}                12   
+          3  This is Darla. She commenced a snooze mid meal{\ldots}                13   
+          4  This is Franklin. He would like you to stop ca{\ldots}                12   
+          
+             rating\_denominator      name  
+          0                  10   Phineas  
+          1                  10     Tilly  
+          2                  10    Archie  
+          3                  10     Darla  
+          4                  10  Franklin  
+\end{Verbatim}
+            
+    \subsubsection{df\_breeds\_pred\_clean: (Image Prediction Dataframe from
+CNN)}\label{df_breeds_pred_clean-image-prediction-dataframe-from-cnn}
+
+\begin{verbatim}
+4. Remove column "img_num"
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}135}]:} \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{img\PYZus{}num}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}df\PYZus{}breeds\PYZus{}pred\PYZus{}clean.head()}
+\end{Verbatim}
+
+
+    \begin{verbatim}
+5. Remove rows where: p1_dog, p2_dog, p3_dog are all False
+6. Remove rows where: p2_dog and p3_dog are lower than 0.2
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}136}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{5. Remove rows where: p1\PYZus{}dog, p2\PYZus{}dog, p3\PYZus{}dog are all False}
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          
+          \PY{c+c1}{\PYZsh{} Identify all indexes of pictures where p1\PYZus{}dog, p2\PYZus{}dog, p3\PYZus{}dog are all False}
+          \PY{n}{not\PYZus{}dog} \PY{o}{=} \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+                   \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+                   \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+          
+          \PY{c+c1}{\PYZsh{} Identify all indexes of pictures where p1\PYZus{}dog has identified no dog and p2\PYZus{}dog \PYZam{} p3\PYZus{}dog has probability of \PYZlt{}20\PYZpc{}}
+          \PY{n}{probnot\PYZus{}dog} \PY{o}{=} \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+                   \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}conf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.2}\PY{p}{)} \PY{o}{\PYZam{}}
+                   \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3\PYZus{}conf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{]}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{index}
+          
+          \PY{c+c1}{\PYZsh{} Put both series into the same variable}
+          \PY{n}{remove\PYZus{}row} \PY{o}{=} \PY{n}{not\PYZus{}dog}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{probnot\PYZus{}dog}\PY{p}{)}
+          
+          \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{remove\PYZus{}row}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{6. Remove rows where: p2\PYZus{}dog and p3\PYZus{}dog are lower than 0.2}
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsubsection{all dataframes:}\label{all-dataframes}
+
+\begin{verbatim}
+7. Convert "tweet_id" in df_info_clean and df_breeds_clean as well as "id" in df_response_clean from integers to strings
+8. Consolidate the numerator and denomitor column using reg expressions
+9. For ID consistency: Removed ids from df_breeds_pred_clean need to be removed from the other dataframes
+10. For ID consistency: Removed all ids from the failed_ids dataframe
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}138}]:} \PY{c+c1}{\PYZsh{}7.}
+          \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{str}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{str}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{str}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{c+c1}{\PYZsh{} Let\PYZsq{}s Merge df\PYZus{}twitter\PYZus{}arch\PYZus{}clean with df\PYZus{}api\PYZus{}trim by tweet id}
+          \PY{n}{df\PYZus{}temp} \PY{o}{=} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Make sure there are no duplicates}
+          \PY{n}{df\PYZus{}temp}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Now we are ready to merge breeds by tweet id}
+          \PY{n}{df\PYZus{}clean} \PY{o}{=} \PY{n}{df\PYZus{}temp}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{inner}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Some tweets are unique but have the same text. Remove these as well. Keep the first occurance}
+          \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{drop\PYZus{}duplicates}\PY{p}{(}\PY{n}{subset}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{text}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{keep}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{first}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}140}]:} \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{8. Consolidate the numerator and denomitor column using reg expressions}
+          \PY{l+s+sd}{\PYZsh{} \PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{c+c1}{\PYZsh{} Find the rows with the string that matches the reg expressions format}
+          \PY{n}{df\PYZus{}clean\PYZus{}rate\PYZus{}format} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{d+/10}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Remove rows that don\PYZsq{}t match the format}
+          \PY{n}{df\PYZus{}clean} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{n}{df\PYZus{}clean\PYZus{}rate\PYZus{}format}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Extract numerators and denominators}
+          \PY{n}{df\PYZus{}clean\PYZus{}rate\PYZus{}format} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{d+/10)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{expand}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating\PYZus{}numerator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}clean\PYZus{}rate\PYZus{}format} \PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n+nb}{int}\PY{p}{(}\PY{n+nb}{str}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{[}\PY{p}{:}\PY{o}{\PYZhy{}}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+          \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating\PYZus{}denominator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+m+mi}{10}
+          
+          \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}140}]:}              tweet\_id                  timestamp  \textbackslash{}
+          0  892420643555336193  2017-08-01 16:23:56 +0000   
+          1  892177421306343426  2017-08-01 00:17:27 +0000   
+          2  891815181378084864  2017-07-31 00:18:03 +0000   
+          3  891689557279858688  2017-07-30 15:58:51 +0000   
+          4  891327558926688256  2017-07-29 16:00:24 +0000   
+          
+                                                          text  rating\_numerator  \textbackslash{}
+          0  This is Phineas. He's a mystical boy. Only eve{\ldots}                13   
+          1  This is Tilly. She's just checking pup on you{\ldots}                13   
+          2  This is Archie. He is a rare Norwegian Pouncin{\ldots}                12   
+          3  This is Darla. She commenced a snooze mid meal{\ldots}                13   
+          4  This is Franklin. He would like you to stop ca{\ldots}                12   
+          
+             rating\_denominator      name  retweet\_count  favorite\_count  \textbackslash{}
+          0                  10   Phineas           8544           38641   
+          1                  10     Tilly           6285           33118   
+          2                  10    Archie           4162           24932   
+          3                  10     Darla           8664           42028   
+          4                  10  Franklin           9423           40183   
+          
+                                                     jpg\_url                      p1  \textbackslash{}
+          0  https://pbs.twimg.com/media/CT4udn0WwAA0aMy.jpg  Welsh\_springer\_spaniel   
+          1  https://pbs.twimg.com/media/CT42GRgUYAA5iDo.jpg                 redbone   
+          2  https://pbs.twimg.com/media/CT4521TWwAEvMyu.jpg         German\_shepherd   
+          3  https://pbs.twimg.com/media/CT5Dr8HUEAA-lEu.jpg     Rhodesian\_ridgeback   
+          4  https://pbs.twimg.com/media/CT5IQmsXIAAKY4A.jpg      miniature\_pinscher   
+          
+              p1\_conf  p1\_dog                  p2   p2\_conf  p2\_dog  \textbackslash{}
+          0  0.465074    True              collie  0.156665    True   
+          1  0.506826    True  miniature\_pinscher  0.074192    True   
+          2  0.596461    True            malinois  0.138584    True   
+          3  0.408143    True             redbone  0.360687    True   
+          4  0.560311    True          Rottweiler  0.243682    True   
+          
+                              p3   p3\_conf  p3\_dog  
+          0    Shetland\_sheepdog  0.061428    True  
+          1  Rhodesian\_ridgeback  0.072010    True  
+          2           bloodhound  0.116197    True  
+          3   miniature\_pinscher  0.222752    True  
+          4             Doberman  0.154629    True  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}141}]:} \PY{c+c1}{\PYZsh{}For tidyness lets remove clean up the doggy names and test column values}
+          \PY{c+c1}{\PYZsh{} Find string that contain format \PYZdq{}This is \PYZlt{}name\PYZgt{}.\PYZdq{} and remove rows that do not have it.}
+          \PY{n}{df\PYZus{}clean\PYZus{}name\PYZus{}format} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{text}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{contains}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is ([A\PYZhy{}Z][a\PYZhy{}z]+).}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Copy the tidy version}
+          \PY{n}{df\PYZus{}clean} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{n}{df\PYZus{}clean\PYZus{}name\PYZus{}format}\PY{p}{]}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Extract the name and input into the name column value}
+          \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{This is ([A\PYZhy{}Z][a\PYZhy{}z]+).}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{expand}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+          
+          \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/ashleyadrias/anaconda3/lib/python3.6/site-packages/ipykernel/\_\_main\_\_.py:3: UserWarning: This pattern has match groups. To actually get the groups, use str.extract.
+  app.launch\_new\_instance()
+
+    \end{Verbatim}
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}141}]:}              tweet\_id                  timestamp  \textbackslash{}
+          0  892420643555336193  2017-08-01 16:23:56 +0000   
+          1  892177421306343426  2017-08-01 00:17:27 +0000   
+          2  891815181378084864  2017-07-31 00:18:03 +0000   
+          3  891689557279858688  2017-07-30 15:58:51 +0000   
+          4  891327558926688256  2017-07-29 16:00:24 +0000   
+          
+                                                          text  rating\_numerator  \textbackslash{}
+          0  This is Phineas. He's a mystical boy. Only eve{\ldots}                13   
+          1  This is Tilly. She's just checking pup on you{\ldots}                13   
+          2  This is Archie. He is a rare Norwegian Pouncin{\ldots}                12   
+          3  This is Darla. She commenced a snooze mid meal{\ldots}                13   
+          4  This is Franklin. He would like you to stop ca{\ldots}                12   
+          
+             rating\_denominator      name  retweet\_count  favorite\_count  \textbackslash{}
+          0                  10   Phineas           8544           38641   
+          1                  10     Tilly           6285           33118   
+          2                  10    Archie           4162           24932   
+          3                  10     Darla           8664           42028   
+          4                  10  Franklin           9423           40183   
+          
+                                                     jpg\_url                      p1  \textbackslash{}
+          0  https://pbs.twimg.com/media/CT4udn0WwAA0aMy.jpg  Welsh\_springer\_spaniel   
+          1  https://pbs.twimg.com/media/CT42GRgUYAA5iDo.jpg                 redbone   
+          2  https://pbs.twimg.com/media/CT4521TWwAEvMyu.jpg         German\_shepherd   
+          3  https://pbs.twimg.com/media/CT5Dr8HUEAA-lEu.jpg     Rhodesian\_ridgeback   
+          4  https://pbs.twimg.com/media/CT5IQmsXIAAKY4A.jpg      miniature\_pinscher   
+          
+              p1\_conf  p1\_dog                  p2   p2\_conf  p2\_dog  \textbackslash{}
+          0  0.465074    True              collie  0.156665    True   
+          1  0.506826    True  miniature\_pinscher  0.074192    True   
+          2  0.596461    True            malinois  0.138584    True   
+          3  0.408143    True             redbone  0.360687    True   
+          4  0.560311    True          Rottweiler  0.243682    True   
+          
+                              p3   p3\_conf  p3\_dog  
+          0    Shetland\_sheepdog  0.061428    True  
+          1  Rhodesian\_ridgeback  0.072010    True  
+          2           bloodhound  0.116197    True  
+          3   miniature\_pinscher  0.222752    True  
+          4             Doberman  0.154629    True  
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}142}]:} \PY{c+c1}{\PYZsh{} Remove the pN\PYZus{}dog and pN\PYZus{}conf that we don\PYZsq{}t need, we will consolidate the probability column}
+          \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}conf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}conf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3\PYZus{}conf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} 
+                                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Rename p1 to the predicted breed}
+          \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predicted\PYZus{}breed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Clean up the formatting of the predicted\PYZus{}breed column, convert \PYZus{} to \PYZdq{} \PYZdq{} and A to a}
+          \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predicted\PYZus{}breed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{predicted\PYZus{}breed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} 
+                                                                          \PY{n}{x}\PY{o}{.}\PY{n}{lower}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{replace}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ }\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}142}]:}              tweet\_id                  timestamp  \textbackslash{}
+          0  892420643555336193  2017-08-01 16:23:56 +0000   
+          1  892177421306343426  2017-08-01 00:17:27 +0000   
+          2  891815181378084864  2017-07-31 00:18:03 +0000   
+          3  891689557279858688  2017-07-30 15:58:51 +0000   
+          4  891327558926688256  2017-07-29 16:00:24 +0000   
+          
+                                                          text  rating\_numerator  \textbackslash{}
+          0  This is Phineas. He's a mystical boy. Only eve{\ldots}                13   
+          1  This is Tilly. She's just checking pup on you{\ldots}                13   
+          2  This is Archie. He is a rare Norwegian Pouncin{\ldots}                12   
+          3  This is Darla. She commenced a snooze mid meal{\ldots}                13   
+          4  This is Franklin. He would like you to stop ca{\ldots}                12   
+          
+             rating\_denominator      name  retweet\_count  favorite\_count  \textbackslash{}
+          0                  10   Phineas           8544           38641   
+          1                  10     Tilly           6285           33118   
+          2                  10    Archie           4162           24932   
+          3                  10     Darla           8664           42028   
+          4                  10  Franklin           9423           40183   
+          
+                                                     jpg\_url         predicted\_breed  
+          0  https://pbs.twimg.com/media/CT4udn0WwAA0aMy.jpg  welsh springer spaniel  
+          1  https://pbs.twimg.com/media/CT42GRgUYAA5iDo.jpg                 redbone  
+          2  https://pbs.twimg.com/media/CT4521TWwAEvMyu.jpg         german shepherd  
+          3  https://pbs.twimg.com/media/CT5Dr8HUEAA-lEu.jpg     rhodesian ridgeback  
+          4  https://pbs.twimg.com/media/CT5IQmsXIAAKY4A.jpg      miniature pinscher  
+\end{Verbatim}
+            
+    \begin{center}\rule{0.5\linewidth}{\linethickness}\end{center}
+
+\subsection{Let's test out the
+changes!}\label{lets-test-out-the-changes}
+
+     1. df\_twitter\_arch\_clean: (Data from WeRateDogs Archive) 1. Remove
+shortened URL 2. Remove rows from retweets or responses 3. Remove
+useless columns (dog stage)
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}143}]:} \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}twitter\PYZus{}arch}\PY{o}{.}\PY{n}{text}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{o}{.}\PY{n}{text}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{n}{length\PYZus{}of\PYZus{}url}\PY{p}{:}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{1.URL was successfully deleted}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+1.URL was successfully deleted
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}144}]:} \PY{k}{try}\PY{p}{:} 
+              \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{n}{remove\PYZus{}cols\PYZus{}info}\PY{p}{]}
+          \PY{k}{except} \PY{n+ne}{KeyError}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Columns successfully deleted}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Columns successfully deleted
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}145}]:} \PY{k}{try}\PY{p}{:} 
+              \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{n}{probnot\PYZus{}dog}\PY{p}{]}
+          \PY{k}{except} \PY{n+ne}{KeyError}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Columns successfully deleted}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Columns successfully deleted
+
+    \end{Verbatim}
+
+     df\_breeds\_pred\_clean: (Image Prediction Dataframe from CNN) 4.
+Remove column "img\_num" 5. Remove rows where: p1\_dog, p2\_dog, p3\_dog
+are all False 6. Remove rows where: p2\_dog and p3\_dog are lower than
+0.2
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}146}]:} \PY{k}{try}\PY{p}{:} 
+              \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{img\PYZus{}num}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{k}{except} \PY{n+ne}{KeyError}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ img\PYZus{}num Column successfully deleted}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+ img\_num Column successfully deleted
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}147}]:} \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+               \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+               \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Not dogs successfully deleted}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          
+          \PY{k}{assert} \PY{n+nb}{len}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p1\PYZus{}dog}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{k+kc}{False}\PY{p}{)} \PY{o}{\PYZam{}}
+                              \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p2\PYZus{}conf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.2}\PY{p}{)} \PY{o}{\PYZam{}}
+                              \PY{p}{(}\PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{p3\PYZus{}conf}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mf}{0.2}\PY{p}{)}\PY{p}{]}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Unlikely dogs successfully deleted}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Not dogs successfully deleted
+Unlikely dogs successfully deleted
+
+    \end{Verbatim}
+
+     all dataframes: 8. Convert "tweet\_id" in df\_info\_clean and
+df\_breeds\_clean as well as "id" in df\_response\_clean from integers
+to strings 9. For ID consistency: Removed ids from
+df\_breeds\_pred\_clean need to be removed from the other dataframes 10.
+For ID consistency: Removed all ids from the failed\_ids dataframe 11.
+Format the numerator and denominator using regular expressions
+
+ tidyness
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Remove the pN\_dog and pN\_conf that we don't need, we will
+  consolidate the probability column
+\item
+  Rename p1 to the predicted breed
+\item
+  Clean up the formatting of the predicted\_breed column, convert \_ to
+  " " and A to a
+\end{enumerate}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}148}]:} \PY{k}{if} \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{o}{.}\PY{n}{columns}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Columns successfully renamed}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              
+          \PY{k}{if} \PY{n}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{O}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df\PYZus{}twitter\PYZus{}arch\PYZus{}clean Dtype change successful}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              
+          \PY{k}{if} \PY{n}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{O}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df\PYZus{}breeds\PYZus{}pred\PYZus{}clean Dtype change successful}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              
+          \PY{k}{if} \PY{n}{df\PYZus{}api\PYZus{}trim\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{tweet\PYZus{}id}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{dtype} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{O}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{df\PYZus{}api\PYZus{}trim\PYZus{}clean Dtype change successful}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Columns successfully renamed
+df\_twitter\_arch\_clean Dtype change successful
+df\_breeds\_pred\_clean Dtype change successful
+df\_api\_trim\_clean Dtype change successful
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}149}]:} \PY{c+c1}{\PYZsh{}Check merge}
+          \PY{k}{if} \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Merge was successful}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+          \PY{k}{else}\PY{p}{:} 
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Merge was unsuccessful}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Merge was successful
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}150}]:} \PY{c+c1}{\PYZsh{}Functions for formatting}
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{l+s+sd}{This function takes a string x in the format of y/z, splits the string into y and z, }
+          \PY{l+s+sd}{and changes the datatypes in order to get divided as a float}
+          \PY{l+s+sd}{\PYZdq{}\PYZdq{}\PYZdq{}}
+          \PY{k}{def} \PY{n+nf}{str\PYZus{}to\PYZus{}var\PYZus{}div}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+          
+              \PY{n}{x\PYZus{}split} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{split}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{/}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+              \PY{n}{x\PYZus{}float} \PY{o}{=} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x\PYZus{}split}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)} \PY{o}{/} \PY{n+nb}{int}\PY{p}{(}\PY{n}{x\PYZus{}split}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+              \PY{k}{return} \PY{n}{x\PYZus{}float}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}151}]:} \PY{c+c1}{\PYZsh{} Extract the numerator/denominator string and then apply the string to variable then divide function}
+          \PY{n}{df\PYZus{}fraction\PYZus{}from\PYZus{}text} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{text}\PY{o}{.}\PY{n}{str}\PY{o}{.}\PY{n}{extract}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{(}\PY{l+s+s2}{\PYZbs{}}\PY{l+s+s2}{d+/10)}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{expand}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{k}{lambda} \PY{n}{x}\PY{p}{:} \PY{n}{str\PYZus{}to\PYZus{}var\PYZus{}div}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}
+          \PY{c+c1}{\PYZsh{}print(df\PYZus{}clean.text.str.extract(\PYZdq{}(\PYZbs{}d+/10)\PYZdq{}, expand=False))}
+          \PY{c+c1}{\PYZsh{}print(df\PYZus{}fraction\PYZus{}from\PYZus{}text)}
+          \PY{n}{df\PYZus{}fraction2\PYZus{}from\PYZus{}column} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating\PYZus{}numerator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{/}\PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{rating\PYZus{}denominator}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+          \PY{c+c1}{\PYZsh{}print(df\PYZus{}fraction2\PYZus{}from\PYZus{}column)}
+          
+          \PY{c+c1}{\PYZsh{} Check the calc worked}
+          \PY{k}{assert} \PY{n}{df\PYZus{}fraction\PYZus{}from\PYZus{}text}\PY{o}{.}\PY{n}{equals}\PY{p}{(}\PY{n}{df\PYZus{}fraction2\PYZus{}from\PYZus{}column}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{String conversion and calculation worked!}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+String conversion and calculation worked!
+
+    \end{Verbatim}
+
+    \section{Finally Export that Data!}\label{finally-export-that-data}
+
+    \subsection{Export to CSV}\label{export-to-csv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}152}]:} \PY{c+c1}{\PYZsh{} Write to CSV file}
+          \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{to\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{wrangled/twitter\PYZus{}archive\PYZus{}master.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Export to SQLite Database}\label{export-to-sqlite-database}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}153}]:} \PY{c+c1}{\PYZsh{} Create engine}
+          \PY{n}{engine} \PY{o}{=} \PY{n}{sqlalchemy}\PY{o}{.}\PY{n}{create\PYZus{}engine}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{sqlite:///wrangled/twitter\PYZus{}archive\PYZus{}master.db}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{c+c1}{\PYZsh{} Create database}
+          \PY{c+c1}{\PYZsh{}df\PYZus{}clean.to\PYZus{}sql(\PYZsq{}master\PYZsq{}, engine, index=False)}
+\end{Verbatim}
+
+
+    \section{Finally Export that Data!}\label{finally-export-that-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}154}]:} \PY{k+kn}{from} \PY{n+nn}{scipy} \PY{k}{import} \PY{n}{stats}\PY{p}{,} \PY{n}{integrate}
+          \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}155}]:} \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}155}]:}              tweet\_id                  timestamp  \textbackslash{}
+          0  892420643555336193  2017-08-01 16:23:56 +0000   
+          1  892177421306343426  2017-08-01 00:17:27 +0000   
+          2  891815181378084864  2017-07-31 00:18:03 +0000   
+          3  891689557279858688  2017-07-30 15:58:51 +0000   
+          4  891327558926688256  2017-07-29 16:00:24 +0000   
+          
+                                                          text  rating\_numerator  \textbackslash{}
+          0  This is Phineas. He's a mystical boy. Only eve{\ldots}                13   
+          1  This is Tilly. She's just checking pup on you{\ldots}                13   
+          2  This is Archie. He is a rare Norwegian Pouncin{\ldots}                12   
+          3  This is Darla. She commenced a snooze mid meal{\ldots}                13   
+          4  This is Franklin. He would like you to stop ca{\ldots}                12   
+          
+             rating\_denominator      name  retweet\_count  favorite\_count  \textbackslash{}
+          0                  10   Phineas           8544           38641   
+          1                  10     Tilly           6285           33118   
+          2                  10    Archie           4162           24932   
+          3                  10     Darla           8664           42028   
+          4                  10  Franklin           9423           40183   
+          
+                                                     jpg\_url         predicted\_breed  
+          0  https://pbs.twimg.com/media/CT4udn0WwAA0aMy.jpg  welsh springer spaniel  
+          1  https://pbs.twimg.com/media/CT42GRgUYAA5iDo.jpg                 redbone  
+          2  https://pbs.twimg.com/media/CT4521TWwAEvMyu.jpg         german shepherd  
+          3  https://pbs.twimg.com/media/CT5Dr8HUEAA-lEu.jpg     rhodesian ridgeback  
+          4  https://pbs.twimg.com/media/CT5IQmsXIAAKY4A.jpg      miniature pinscher  
+\end{Verbatim}
+            
+    Let's look at what the most popular names for dogs are:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}156}]:} \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          
+          \PY{n}{names} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{names}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}348A94}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{ax}\PY{p}{,} \PY{n}{edgecolor} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{names}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}D3D3D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_77_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Let's see what the most popular dog types are:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}157}]:} \PY{c+c1}{\PYZsh{} Creating a favorite dataframe by the groupped breeds, counted the favorites.}
+          \PY{n}{df\PYZus{}favorite} \PY{o}{=} \PY{n}{df\PYZus{}clean}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted\PYZus{}breed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{favorite\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{p}{)}
+          \PY{n}{df\PYZus{}sorted} \PY{o}{=} \PY{n}{df\PYZus{}favorite}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{favorite\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+          \PY{n}{ser\PYZus{}fav} \PY{o}{=} \PY{n}{df\PYZus{}sorted}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{favorite\PYZus{}count}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{ser\PYZus{}breed} \PY{o}{=} \PY{n}{df\PYZus{}sorted}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{predicted\PYZus{}breed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n}{fig}\PY{p}{,} \PY{n}{ax} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+          \PY{n}{fav} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{barh}\PY{p}{(}\PY{n}{ser\PYZus{}breed}\PY{p}{,} \PY{n}{ser\PYZus{}fav}\PY{p}{,} \PY{n}{color} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZsh{}C13016}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{edgecolor} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{*}\PY{n+nb}{len}\PY{p}{(}\PY{n}{ser\PYZus{}breed}\PY{p}{)}\PY{p}{)}
+          \PY{n}{ax}\PY{o}{.}\PY{n}{set\PYZus{}facecolor}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{}D3D3D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Favorites}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of Favorites by Breed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xticks}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{arange}\PY{p}{(}\PY{l+m+mi}{200000}\PY{p}{,} \PY{l+m+mi}{600000}\PY{p}{,} \PY{l+m+mi}{200000}\PY{p}{)}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}\PY{p}{;}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_79_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
